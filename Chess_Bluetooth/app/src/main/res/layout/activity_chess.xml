@@ -13,13 +13,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/b1"
+            android:id="@+id/b0"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/colorButtonNormal"
             android:backgroundTint="?attr/colorButtonNormal"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:text="" />
+
+        <Button
+            android:id="@+id/b1"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -30,8 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -42,8 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -54,8 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -66,8 +78,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -78,8 +90,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -90,11 +102,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b8"
@@ -107,12 +125,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b9"
@@ -120,8 +132,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -132,8 +144,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -144,8 +156,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -156,8 +168,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -168,8 +180,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -180,8 +192,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -192,11 +204,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b16"
@@ -209,12 +227,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b17"
@@ -222,8 +234,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -234,8 +246,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -246,8 +258,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -258,8 +270,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -270,8 +282,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -282,8 +294,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -294,11 +306,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b24"
@@ -311,12 +329,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b25"
@@ -324,8 +336,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -336,8 +348,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -348,8 +360,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -360,8 +372,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -372,8 +384,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -384,8 +396,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -396,11 +408,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b32"
@@ -413,12 +431,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b33"
@@ -426,8 +438,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -438,8 +450,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -450,8 +462,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -462,8 +474,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -474,8 +486,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -486,8 +498,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -498,11 +510,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b40"
@@ -515,12 +533,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b41"
@@ -528,8 +540,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -540,8 +552,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -552,8 +564,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -564,8 +576,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -576,8 +588,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -588,8 +600,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -600,11 +612,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b48"
@@ -617,12 +635,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b49"
@@ -630,8 +642,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -642,8 +654,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -654,8 +666,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -666,8 +678,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -678,8 +690,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -690,8 +702,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -702,11 +714,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b56"
@@ -719,12 +737,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/b57"
@@ -732,8 +744,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -744,8 +756,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -756,8 +768,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -768,8 +780,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
+            android:background="@android:color/holo_orange_light"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -780,8 +792,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:text="" />
@@ -792,18 +804,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/colorButtonNormal"
-            android:backgroundTint="?attr/colorButtonNormal"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:text="" />
-
-        <Button
-            android:id="@+id/b63"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@android:color/holo_orange_light"
             android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
@@ -811,7 +811,7 @@
             android:text="" />
 
         <Button
-            android:id="@+id/b64"
+            android:id="@+id/b63"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
