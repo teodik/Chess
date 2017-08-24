@@ -18,6 +18,8 @@
         </activity>
 
         <activity android:name=".ChessActivity" />
+        <activity android:name=".PawnDialog" />
+        <activity android:name=".BpawnDialog" />
     </application>
 
 </manifest>

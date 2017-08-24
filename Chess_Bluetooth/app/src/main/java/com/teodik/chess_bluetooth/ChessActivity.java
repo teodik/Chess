@@ -1,185 +1,295 @@
 package com.teodik.chess_bluetooth;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.view.View;;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class ChessActivity extends AppCompatActivity implements View.OnClickListener{
-
+    private Handler handler = new Handler();
+    private boolean validate;
     private String piece;
-    private int location;
+    private int origin;
+    private int destination;
     private boolean turn;
-    private Button b0;
-    private Button b1;
-    private Button b2;
-    private Button b3;
-    private Button b4;
-    private Button b5;
-    private Button b6;
-    private Button b7;
-    private Button b8;
-    private Button b9;
-    private Button b10;
-    private Button b11;
-    private Button b12;
-    private Button b13;
-    private Button b14;
-    private Button b15;
-    private Button b16;
-    private Button b17;
-    private Button b18;
-    private Button b19;
-    private Button b20;
-    private Button b21;
-    private Button b22;
-    private Button b23;
-    private Button b24;
-    private Button b25;
-    private Button b26;
-    private Button b27;
-    private Button b28;
-    private Button b29;
-    private Button b30;
-    private Button b31;
-    private Button b32;
-    private Button b33;
-    private Button b34;
-    private Button b35;
-    private Button b36;
-    private Button b37;
-    private Button b38;
-    private Button b39;
-    private Button b40;
-    private Button b41;
-    private Button b42;
-    private Button b43;
-    private Button b44;
-    private Button b45;
-    private Button b46;
-    private Button b47;
-    private Button b48;
-    private Button b49;
-    private Button b50;
-    private Button b51;
-    private Button b52;
-    private Button b53;
-    private Button b54;
-    private Button b55;
-    private Button b56;
-    private Button b57;
-    private Button b58;
-    private Button b59;
-    private Button b60;
-    private Button b61;
-    private Button b62;
-    private Button b63;
-
-    private Button[] buttons;
+    private boolean[] whitePawns;
+    private boolean[] blackPawns;
+    private static final int white = 1;
+    private static final int black = 2;
+    private int pawnPromotion;
+    private ImageButton b0;
+    private ImageButton b1;
+    private ImageButton b2;
+    private ImageButton b3;
+    private ImageButton b4;
+    private ImageButton b5;
+    private ImageButton b6;
+    private ImageButton b7;
+    private ImageButton b8;
+    private ImageButton b9;
+    private ImageButton b10;
+    private ImageButton b11;
+    private ImageButton b12;
+    private ImageButton b13;
+    private ImageButton b14;
+    private ImageButton b15;
+    private ImageButton b16;
+    private ImageButton b17;
+    private ImageButton b18;
+    private ImageButton b19;
+    private ImageButton b20;
+    private ImageButton b21;
+    private ImageButton b22;
+    private ImageButton b23;
+    private ImageButton b24;
+    private ImageButton b25;
+    private ImageButton b26;
+    private ImageButton b27;
+    private ImageButton b28;
+    private ImageButton b29;
+    private ImageButton b30;
+    private ImageButton b31;
+    private ImageButton b32;
+    private ImageButton b33;
+    private ImageButton b34;
+    private ImageButton b35;
+    private ImageButton b36;
+    private ImageButton b37;
+    private ImageButton b38;
+    private ImageButton b39;
+    private ImageButton b40;
+    private ImageButton b41;
+    private ImageButton b42;
+    private ImageButton b43;
+    private ImageButton b44;
+    private ImageButton b45;
+    private ImageButton b46;
+    private ImageButton b47;
+    private ImageButton b48;
+    private ImageButton b49;
+    private ImageButton b50;
+    private ImageButton b51;
+    private ImageButton b52;
+    private ImageButton b53;
+    private ImageButton b54;
+    private ImageButton b55;
+    private ImageButton b56;
+    private ImageButton b57;
+    private ImageButton b58;
+    private ImageButton b59;
+    private ImageButton b60;
+    private ImageButton b61;
+    private ImageButton b62;
+    private ImageButton b63;
+    private ImageButton[] buttons;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chess);
+        validate = false;
         turn = true;
         piece = "";
-        location = -1;
-        b0 = (Button) findViewById(R.id.b0);
-        b1 = (Button) findViewById(R.id.b1);
-        b2 = (Button) findViewById(R.id.b2);
-        b3 = (Button) findViewById(R.id.b3);
-        b4 = (Button) findViewById(R.id.b4);
-        b5 = (Button) findViewById(R.id.b5);
-        b6 = (Button) findViewById(R.id.b6);
-        b7 = (Button) findViewById(R.id.b7);
-        b8 = (Button) findViewById(R.id.b8);
-        b9 = (Button) findViewById(R.id.b9);
-        b10 = (Button) findViewById(R.id.b10);
-        b11 = (Button) findViewById(R.id.b11);
-        b12 = (Button) findViewById(R.id.b12);
-        b13 = (Button) findViewById(R.id.b13);
-        b14 = (Button) findViewById(R.id.b14);
-        b15 = (Button) findViewById(R.id.b15);
-        b16 = (Button) findViewById(R.id.b16);
-        b17 = (Button) findViewById(R.id.b17);
-        b18 = (Button) findViewById(R.id.b18);
-        b19 = (Button) findViewById(R.id.b19);
-        b20 = (Button) findViewById(R.id.b20);
-        b21 = (Button) findViewById(R.id.b21);
-        b22 = (Button) findViewById(R.id.b22);
-        b23 = (Button) findViewById(R.id.b23);
-        b24 = (Button) findViewById(R.id.b24);
-        b25 = (Button) findViewById(R.id.b25);
-        b26 = (Button) findViewById(R.id.b26);
-        b27 = (Button) findViewById(R.id.b27);
-        b28 = (Button) findViewById(R.id.b28);
-        b29 = (Button) findViewById(R.id.b29);
-        b30 = (Button) findViewById(R.id.b30);
-        b31 = (Button) findViewById(R.id.b31);
-        b32 = (Button) findViewById(R.id.b32);
-        b33 = (Button) findViewById(R.id.b33);
-        b34 = (Button) findViewById(R.id.b34);
-        b35 = (Button) findViewById(R.id.b35);
-        b36 = (Button) findViewById(R.id.b36);
-        b37 = (Button) findViewById(R.id.b37);
-        b38 = (Button) findViewById(R.id.b38);
-        b39 = (Button) findViewById(R.id.b39);
-        b40 = (Button) findViewById(R.id.b40);
-        b41 = (Button) findViewById(R.id.b41);
-        b42 = (Button) findViewById(R.id.b42);
-        b43 = (Button) findViewById(R.id.b43);
-        b44 = (Button) findViewById(R.id.b44);
-        b45 = (Button) findViewById(R.id.b45);
-        b46 = (Button) findViewById(R.id.b46);
-        b47 = (Button) findViewById(R.id.b47);
-        b48 = (Button) findViewById(R.id.b48);
-        b49 = (Button) findViewById(R.id.b49);
-        b50 = (Button) findViewById(R.id.b50);
-        b51 = (Button) findViewById(R.id.b51);
-        b52 = (Button) findViewById(R.id.b52);
-        b53 = (Button) findViewById(R.id.b53);
-        b54 = (Button) findViewById(R.id.b54);
-        b55 = (Button) findViewById(R.id.b55);
-        b56 = (Button) findViewById(R.id.b56);
-        b57 = (Button) findViewById(R.id.b57);
-        b58 = (Button) findViewById(R.id.b58);
-        b59 = (Button) findViewById(R.id.b59);
-        b60 = (Button) findViewById(R.id.b60);
-        b61 = (Button) findViewById(R.id.b61);
-        b62 = (Button) findViewById(R.id.b62);
-        b63 = (Button) findViewById(R.id.b63);
-        b0.setText("BR");
-        b1.setText("BN");
-        b2.setText("BB");
-        b3.setText("BK");
-        b4.setText("BQ");
-        b5.setText("BB");
-        b6.setText("BN");
-        b7.setText("BR");
-        b8.setText("BP");
-        b9.setText("BP");
-        b10.setText("BP");
-        b11.setText("BP");
-        b12.setText("BP");
-        b13.setText("BP");
-        b14.setText("BP");
-        b15.setText("BP");
-        b48.setText("WP");
-        b49.setText("WP");
-        b50.setText("WP");
-        b51.setText("WP");
-        b52.setText("WP");
-        b53.setText("WP");
-        b54.setText("WP");
-        b55.setText("WP");
-        b56.setText("WR");
-        b57.setText("WN");
-        b58.setText("WB");
-        b59.setText("WK");
-        b60.setText("WQ");
-        b61.setText("WB");
-        b62.setText("WN");
-        b63.setText("WR");
+        origin = -1;
+        destination = -1;
+        pawnPromotion = -1;
+        whitePawns = new boolean[]{false, false, false, false, false, false, false, false};
+        blackPawns = new boolean[]{false, false, false, false, false, false, false, false};
+        b0 = (ImageButton) findViewById(R.id.b0);
+        b1 = (ImageButton) findViewById(R.id.b1);
+        b2 = (ImageButton) findViewById(R.id.b2);
+        b3 = (ImageButton) findViewById(R.id.b3);
+        b4 = (ImageButton) findViewById(R.id.b4);
+        b5 = (ImageButton) findViewById(R.id.b5);
+        b6 = (ImageButton) findViewById(R.id.b6);
+        b7 = (ImageButton) findViewById(R.id.b7);
+        b8 = (ImageButton) findViewById(R.id.b8);
+        b9 = (ImageButton) findViewById(R.id.b9);
+        b10 = (ImageButton) findViewById(R.id.b10);
+        b11 = (ImageButton) findViewById(R.id.b11);
+        b12 = (ImageButton) findViewById(R.id.b12);
+        b13 = (ImageButton) findViewById(R.id.b13);
+        b14 = (ImageButton) findViewById(R.id.b14);
+        b15 = (ImageButton) findViewById(R.id.b15);
+        b16 = (ImageButton) findViewById(R.id.b16);
+        b17 = (ImageButton) findViewById(R.id.b17);
+        b18 = (ImageButton) findViewById(R.id.b18);
+        b19 = (ImageButton) findViewById(R.id.b19);
+        b20 = (ImageButton) findViewById(R.id.b20);
+        b21 = (ImageButton) findViewById(R.id.b21);
+        b22 = (ImageButton) findViewById(R.id.b22);
+        b23 = (ImageButton) findViewById(R.id.b23);
+        b24 = (ImageButton) findViewById(R.id.b24);
+        b25 = (ImageButton) findViewById(R.id.b25);
+        b26 = (ImageButton) findViewById(R.id.b26);
+        b27 = (ImageButton) findViewById(R.id.b27);
+        b28 = (ImageButton) findViewById(R.id.b28);
+        b29 = (ImageButton) findViewById(R.id.b29);
+        b30 = (ImageButton) findViewById(R.id.b30);
+        b31 = (ImageButton) findViewById(R.id.b31);
+        b32 = (ImageButton) findViewById(R.id.b32);
+        b33 = (ImageButton) findViewById(R.id.b33);
+        b34 = (ImageButton) findViewById(R.id.b34);
+        b35 = (ImageButton) findViewById(R.id.b35);
+        b36 = (ImageButton) findViewById(R.id.b36);
+        b37 = (ImageButton) findViewById(R.id.b37);
+        b38 = (ImageButton) findViewById(R.id.b38);
+        b39 = (ImageButton) findViewById(R.id.b39);
+        b40 = (ImageButton) findViewById(R.id.b40);
+        b41 = (ImageButton) findViewById(R.id.b41);
+        b42 = (ImageButton) findViewById(R.id.b42);
+        b43 = (ImageButton) findViewById(R.id.b43);
+        b44 = (ImageButton) findViewById(R.id.b44);
+        b45 = (ImageButton) findViewById(R.id.b45);
+        b46 = (ImageButton) findViewById(R.id.b46);
+        b47 = (ImageButton) findViewById(R.id.b47);
+        b48 = (ImageButton) findViewById(R.id.b48);
+        b49 = (ImageButton) findViewById(R.id.b49);
+        b50 = (ImageButton) findViewById(R.id.b50);
+        b51 = (ImageButton) findViewById(R.id.b51);
+        b52 = (ImageButton) findViewById(R.id.b52);
+        b53 = (ImageButton) findViewById(R.id.b53);
+        b54 = (ImageButton) findViewById(R.id.b54);
+        b55 = (ImageButton) findViewById(R.id.b55);
+        b56 = (ImageButton) findViewById(R.id.b56);
+        b57 = (ImageButton) findViewById(R.id.b57);
+        b58 = (ImageButton) findViewById(R.id.b58);
+        b59 = (ImageButton) findViewById(R.id.b59);
+        b60 = (ImageButton) findViewById(R.id.b60);
+        b61 = (ImageButton) findViewById(R.id.b61);
+        b62 = (ImageButton) findViewById(R.id.b62);
+        b63 = (ImageButton) findViewById(R.id.b63);
+        b0.setTag("BR");
+        b0.setImageResource(R.drawable.br);
+        b1.setTag("BN");
+        b1.setImageResource(R.drawable.bn);
+        b2.setTag("BB");
+        b2.setImageResource(R.drawable.bb);
+        b3.setTag("BQ");
+        b3.setImageResource(R.drawable.bq);
+        b4.setTag("BK");
+        b4.setImageResource(R.drawable.bk);
+        b5.setTag("BB");
+        b5.setImageResource(R.drawable.bb);
+        b6.setTag("BN");
+        b6.setImageResource(R.drawable.bn);
+        b7.setTag("BR");
+        b7.setImageResource(R.drawable.br);
+        b8.setTag("BP");
+        b8.setImageResource(R.drawable.bp);
+        b9.setTag("BP");
+        b9.setImageResource(R.drawable.bp);
+        b10.setTag("BP");
+        b10.setImageResource(R.drawable.bp);
+        b11.setTag("BP");
+        b11.setImageResource(R.drawable.bp);
+        b12.setTag("BP");
+        b12.setImageResource(R.drawable.bp);
+        b13.setTag("BP");
+        b13.setImageResource(R.drawable.bp);
+        b14.setTag("BP");
+        b14.setImageResource(R.drawable.bp);
+        b15.setTag("BP");
+        b15.setImageResource(R.drawable.bp);
+        b16.setTag("");
+        b16.setImageResource(0);
+        b17.setTag("");
+        b17.setImageResource(0);
+        b18.setTag("");
+        b18.setImageResource(0);
+        b19.setTag("");
+        b19.setImageResource(0);
+        b20.setTag("");
+        b20.setImageResource(0);
+        b21.setTag("");
+        b21.setImageResource(0);
+        b22.setTag("");
+        b22.setImageResource(0);
+        b23.setTag("");
+        b23.setImageResource(0);
+        b24.setTag("");
+        b24.setImageResource(0);
+        b25.setTag("");
+        b25.setImageResource(0);
+        b26.setTag("");
+        b26.setImageResource(0);
+        b27.setTag("");
+        b27.setImageResource(0);
+        b28.setTag("");
+        b28.setImageResource(0);
+        b29.setTag("");
+        b29.setImageResource(0);
+        b30.setTag("");
+        b30.setImageResource(0);
+        b31.setTag("");
+        b31.setImageResource(0);
+        b32.setTag("");
+        b32.setImageResource(0);
+        b33.setTag("");
+        b33.setImageResource(0);
+        b34.setTag("");
+        b34.setImageResource(0);
+        b35.setTag("");
+        b35.setImageResource(0);
+        b36.setTag("");
+        b36.setImageResource(0);
+        b37.setTag("");
+        b37.setImageResource(0);
+        b38.setTag("");
+        b38.setImageResource(0);
+        b39.setTag("");
+        b39.setImageResource(0);
+        b40.setTag("");
+        b40.setImageResource(0);
+        b41.setTag("");
+        b41.setImageResource(0);
+        b42.setTag("");
+        b42.setImageResource(0);
+        b43.setTag("");
+        b43.setImageResource(0);
+        b44.setTag("");
+        b44.setImageResource(0);
+        b45.setTag("");
+        b45.setImageResource(0);
+        b46.setTag("");
+        b46.setImageResource(0);
+        b47.setTag("");
+        b47.setImageResource(0);
+        b48.setTag("WP");
+        b48.setImageResource(R.drawable.wp);
+        b49.setTag("WP");
+        b49.setImageResource(R.drawable.wp);
+        b50.setTag("WP");
+        b50.setImageResource(R.drawable.wp);
+        b51.setTag("WP");
+        b51.setImageResource(R.drawable.wp);
+        b52.setTag("WP");
+        b52.setImageResource(R.drawable.wp);
+        b53.setTag("WP");
+        b53.setImageResource(R.drawable.wp);
+        b54.setTag("WP");
+        b54.setImageResource(R.drawable.wp);
+        b55.setTag("WP");
+        b55.setImageResource(R.drawable.wp);
+        b56.setTag("WR");
+        b56.setImageResource(R.drawable.wr);
+        b57.setTag("WN");
+        b57.setImageResource(R.drawable.wn);
+        b58.setTag("WB");
+        b58.setImageResource(R.drawable.wb);
+        b59.setTag("WQ");
+        b59.setImageResource(R.drawable.wq);
+        b60.setTag("WK");
+        b60.setImageResource(R.drawable.wk);
+        b61.setTag("WB");
+        b61.setImageResource(R.drawable.wb);
+        b62.setTag("WN");
+        b62.setImageResource(R.drawable.wn);
+        b63.setTag("WR");
+        b63.setImageResource(R.drawable.wr);
         b0.setOnClickListener(this);
         b1.setOnClickListener(this);
         b2.setOnClickListener(this);
@@ -244,309 +354,1723 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
         b61.setOnClickListener(this);
         b62.setOnClickListener(this);
         b63.setOnClickListener(this);
-        buttons = new Button[64];
-        buttons[0] = b0;
-        buttons[1] = b1;
-        buttons[2] = b2;
-        buttons[3] = b3;
-        buttons[4] = b4;
-        buttons[5] = b5;
-        buttons[6] = b6;
-        buttons[7] = b7;
-        buttons[8] = b8;
-        buttons[9] = b9;
-        buttons[10] = b10;
-        buttons[11] = b11;
-        buttons[12] = b12;
-        buttons[13] = b13;
-        buttons[14] = b14;
-        buttons[15] = b15;
-        buttons[16] = b16;
-        buttons[17] = b17;
-        buttons[18] = b18;
-        buttons[19] = b19;
-        buttons[20] = b20;
-        buttons[21] = b21;
-        buttons[22] = b22;
-        buttons[23] = b23;
-        buttons[24] = b24;
-        buttons[25] = b25;
-        buttons[26] = b26;
-        buttons[27] = b27;
-        buttons[28] = b28;
-        buttons[29] = b29;
-        buttons[30] = b30;
-        buttons[31] = b31;
-        buttons[32] = b32;
-        buttons[33] = b33;
-        buttons[34] = b34;
-        buttons[35] = b35;
-        buttons[36] = b36;
-        buttons[37] = b37;
-        buttons[38] = b38;
-        buttons[39] = b39;
-        buttons[40] = b40;
-        buttons[41] = b41;
-        buttons[42] = b42;
-        buttons[43] = b43;
-        buttons[44] = b44;
-        buttons[45] = b45;
-        buttons[46] = b46;
-        buttons[47] = b47;
-        buttons[48] = b48;
-        buttons[49] = b49;
-        buttons[50] = b50;
-        buttons[51] = b51;
-        buttons[52] = b52;
-        buttons[53] = b53;
-        buttons[54] = b54;
-        buttons[55] = b55;
-        buttons[56] = b56;
-        buttons[57] = b57;
-        buttons[58] = b58;
-        buttons[59] = b59;
-        buttons[60] = b60;
-        buttons[61] = b61;
-        buttons[62] = b62;
-        buttons[63] = b63;
+        buttons = new ImageButton[]{b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15,
+                b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31,
+                b32, b33, b34, b35, b36, b37, b38, b39, b40, b41, b42, b43, b44, b45, b46, b47,
+                b48, b49, b50, b51, b52, b53, b54, b55, b56, b57, b58, b59, b60, b61, b62, b63};
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.b0:
-                if(piece.equals("")&&location == -1) {
-                    piece = b0.getText().toString();
-                    location = 0;
+                if(piece.equals("") && origin == -1) {
+                    if(!b0.getTag().equals("")) {
+                        piece = b0.getTag().toString();
+                        origin = 0;
+                    }
                 }
-                else if(piece.equals(b0.getText().toString())&& location == 0){
+                else if(piece.equals(b0.getTag().toString())&& origin == 0){
                     piece = "";
-                    location = -1;
+                    origin = -1;
                     Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
-
                 }
                 else{
-                    if(equaluate(piece, location, 0)){
-                        turn = !turn;
-                        piece = "";
-                        location = -1;
-                    }
-                    else{
-                        piece = "";
-                        location = -1;
-                        Toast.makeText(ChessActivity.this, "Not a valid move!", Toast.LENGTH_LONG).show();
-                    }
+                    destination = 0;
+                    evaluate();
                 }
                 break;
             case R.id.b1:
+                if(piece.equals("") && origin == -1) {
+                    if(!b1.getTag().equals("")) {
+                        piece = b1.getTag().toString();
+                        origin = 1;
+                    }
+                }
+                else if(piece.equals(b1.getTag().toString())&& origin == 1) {
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 1;
+                    evaluate();
+                }
                 break;
             case R.id.b2:
+                if(piece.equals("") && origin == -1) {
+                    if(!b2.getTag().equals("")) {
+                        piece = b2.getTag().toString();
+                        origin = 2;
+                    }
+                }
+                else if(piece.equals(b2.getTag().toString())&& origin == 2){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 2;
+                    evaluate();
+                }
                 break;
             case R.id.b3:
+                if(piece.equals("") && origin == -1) {
+                    if(!b3.getTag().equals("")) {
+                        piece = b3.getTag().toString();
+                        origin = 3;
+                    }
+                }
+                else if(piece.equals(b3.getTag().toString())&& origin == 3){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 3;
+                    evaluate();
+                }
                 break;
             case R.id.b4:
+                if(piece.equals("") && origin == -1) {
+                    if(!b4.getTag().equals("")) {
+                        piece = b4.getTag().toString();
+                        origin = 4;
+                    }
+                }
+                else if(piece.equals(b4.getTag().toString())&& origin == 4){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 4;
+                    evaluate();
+                }
                 break;
             case R.id.b5:
+                if(piece.equals("") && origin == -1) {
+                    if(!b5.getTag().equals("")) {
+                        piece = b5.getTag().toString();
+                        origin = 5;
+                    }
+                }
+                else if(piece.equals(b5.getTag().toString())&& origin == 5){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 5;
+                    evaluate();
+                }
                 break;
             case R.id.b6:
+                if(piece.equals("") && origin == -1) {
+                    if(!b6.getTag().equals("")) {
+                        piece = b6.getTag().toString();
+                        origin = 6;
+                    }
+                }
+                else if(piece.equals(b6.getTag().toString())&& origin == 6){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 6;
+                    evaluate();
+                }
                 break;
             case R.id.b7:
+                if(piece.equals("") && origin == -1) {
+                    if(!b7.getTag().equals("")) {
+                        piece = b7.getTag().toString();
+                        origin = 7;
+                    }
+                }
+                else if(piece.equals(b7.getTag().toString())&& origin == 7){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 7;
+                    evaluate();
+                }
                 break;
             case R.id.b8:
+                if(piece.equals("") && origin == -1) {
+                    if(!b8.getTag().equals("")) {
+                        piece = b8.getTag().toString();
+                        origin = 8;
+                    }
+                }
+                else if(piece.equals(b8.getTag().toString())&& origin == 8){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 8;
+                    evaluate();
+                }
                 break;
             case R.id.b9:
-                if(piece.equals("")&&location == -1) {
-                    piece = b9.getText().toString();
-                    location = 8;
+                if(piece.equals("")&&origin == -1) {
+                    if(!b9.getTag().equals("")) {
+                        piece = b9.getTag().toString();
+                        origin = 9;
+                    }
                 }
-                else if(piece.equals(b9.getText().toString())&& location == 8){
+                else if(piece.equals(b9.getTag().toString())&& origin == 9){
                     piece = "";
-                    location = -1;
+                    origin = -1;
                     Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
 
                 }
                 else{
-                    if(equaluate(piece, location, 8)){
-                        turn = !turn;
-                        piece = "";
-                        location = -1;
-                    }
-                    else{
-                        piece = "";
-                        location = -1;
-                        Toast.makeText(ChessActivity.this, "Not a valid move!", Toast.LENGTH_LONG).show();
-                    }
+                    destination = 9;
+                    evaluate();
                 }
                 break;
             case R.id.b10:
+                if(piece.equals("") && origin == -1) {
+                    if(!b10.getTag().equals("")) {
+                        piece = b10.getTag().toString();
+                        origin = 10;
+                    }
+                }
+                else if(piece.equals(b10.getTag().toString())&& origin == 10){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 10;
+                    evaluate();
+                }
                 break;
             case R.id.b11:
+                if(piece.equals("") && origin == -1) {
+                    if(!b11.getTag().equals("")) {
+                        piece = b11.getTag().toString();
+                        origin = 11;
+                    }
+                }
+                else if(piece.equals(b11.getTag().toString())&& origin == 11){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 11;
+                    evaluate();
+                }
                 break;
             case R.id.b12:
+                if(piece.equals("") && origin == -1) {
+                    if(!b12.getTag().equals("")) {
+                        piece = b12.getTag().toString();
+                        origin = 12;
+                    }
+                }
+                else if(piece.equals(b12.getTag().toString())&& origin == 12){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 12;
+                    evaluate();
+                }
                 break;
             case R.id.b13:
+                if(piece.equals("") && origin == -1) {
+                    if(!b13.getTag().equals("")) {
+                        piece = b13.getTag().toString();
+                        origin = 13;
+                    }
+                }
+                else if(piece.equals(b13.getTag().toString())&& origin == 13){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 13;
+                    evaluate();
+                }
                 break;
             case R.id.b14:
+                if(piece.equals("") && origin == -1) {
+                    if(!b14.getTag().equals("")) {
+                        piece = b14.getTag().toString();
+                        origin = 14;
+                    }
+                }
+                else if(piece.equals(b14.getTag().toString())&& origin == 14){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 14;
+                    evaluate();
+                }
                 break;
             case R.id.b15:
+                if(piece.equals("") && origin == -1) {
+                    if(!b15.getTag().equals("")) {
+                        piece = b15.getTag().toString();
+                        origin = 15;
+                    }
+                }
+                else if(piece.equals(b15.getTag().toString())&& origin == 15){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 15;
+                    evaluate();
+                }
                 break;
             case R.id.b16:
+                if(piece.equals("") && origin == -1) {
+                    if(!b16.getTag().equals("")) {
+                        piece = b16.getTag().toString();
+                        origin = 16;
+                    }
+                }
+                else if(piece.equals(b16.getTag().toString())&& origin == 16){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 16;
+                    evaluate();
+                }
                 break;
             case R.id.b17:
+                if(piece.equals("") && origin == -1) {
+                    if(!b17.getTag().equals("")) {
+                        piece = b17.getTag().toString();
+                        origin = 17;
+                    }
+                }
+                else if(piece.equals(b17.getTag().toString())&& origin == 17){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 17;
+                    evaluate();
+                }
                 break;
             case R.id.b18:
+                if(piece.equals("") && origin == -1) {
+                    if(!b18.getTag().equals("")) {
+                        piece = b18.getTag().toString();
+                        origin = 18;
+                    }
+                }
+                else if(piece.equals(b18.getTag().toString())&& origin == 18){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 18;
+                    evaluate();
+                }
                 break;
             case R.id.b19:
+                if(piece.equals("") && origin == -1) {
+                    if(!b19.getTag().equals("")) {
+                        piece = b19.getTag().toString();
+                        origin = 19;
+                    }
+                }
+                else if(piece.equals(b19.getTag().toString())&& origin == 19){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 19;
+                    evaluate();
+                }
                 break;
             case R.id.b20:
+                if(piece.equals("") && origin == -1) {
+                    if(!b20.getTag().equals("")) {
+                        piece = b20.getTag().toString();
+                        origin = 20;
+                    }
+                }
+                else if(piece.equals(b20.getTag().toString())&& origin == 20){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 20;
+                    evaluate();
+                }
                 break;
             case R.id.b21:
+                if(piece.equals("") && origin == -1) {
+                    if(!b21.getTag().equals("")) {
+                        piece = b21.getTag().toString();
+                        origin = 21;
+                    }
+                }
+                else if(piece.equals(b21.getTag().toString())&& origin == 21){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 21;
+                    evaluate();
+                }
                 break;
             case R.id.b22:
+                if(piece.equals("") && origin == -1) {
+                    if(!b22.getTag().equals("")) {
+                        piece = b22.getTag().toString();
+                        origin = 22;
+                    }
+                }
+                else if(piece.equals(b22.getTag().toString())&& origin == 22){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 22;
+                    evaluate();
+                }
                 break;
             case R.id.b23:
+                if(piece.equals("") && origin == -1) {
+                    if(!b23.getTag().equals("")) {
+                        piece = b23.getTag().toString();
+                        origin = 23;
+                    }
+                }
+                else if(piece.equals(b23.getTag().toString())&& origin == 23){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 23;
+                    evaluate();
+                }
                 break;
             case R.id.b24:
+                if(piece.equals("") && origin == -1) {
+                    if(!b24.getTag().equals("")) {
+                        piece = b24.getTag().toString();
+                        origin = 24;
+                    }
+                }
+                else if(piece.equals(b24.getTag().toString())&& origin == 24){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 24;
+                    evaluate();
+                }
                 break;
             case R.id.b25:
+                if(piece.equals("") && origin == -1) {
+                    if(!b25.getTag().equals("")) {
+                        piece = b25.getTag().toString();
+                        origin = 25;
+                    }
+                }
+                else if(piece.equals(b25.getTag().toString())&& origin == 25){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 25;
+                    evaluate();
+                }
                 break;
             case R.id.b26:
+                if(piece.equals("") && origin == -1) {
+                    if(!b26.getTag().equals("")) {
+                        piece = b26.getTag().toString();
+                        origin = 26;
+                    }
+                }
+                else if(piece.equals(b26.getTag().toString())&& origin == 26){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 26;
+                    evaluate();
+                }
                 break;
             case R.id.b27:
+                if(piece.equals("") && origin == -1) {
+                    if(!b27.getTag().equals("")) {
+                        piece = b27.getTag().toString();
+                        origin = 27;
+                    }
+                }
+                else if(piece.equals(b27.getTag().toString())&& origin == 27){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 27;
+                    evaluate();
+                }
                 break;
             case R.id.b28:
+                if(piece.equals("") && origin == -1) {
+                    if(!b28.getTag().equals("")) {
+                        piece = b28.getTag().toString();
+                        origin = 28;
+                    }
+                }
+                else if(piece.equals(b28.getTag().toString())&& origin == 28){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 28;
+                    evaluate();
+                }
                 break;
             case R.id.b29:
+                if(piece.equals("") && origin == -1) {
+                    if(!b29.getTag().equals("")) {
+                        piece = b29.getTag().toString();
+                        origin = 29;
+                    }
+                }
+                else if(piece.equals(b29.getTag().toString())&& origin == 29){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 29;
+                    evaluate();
+                }
                 break;
             case R.id.b30:
+                if(piece.equals("") && origin == -1) {
+                    if(!b30.getTag().equals("")) {
+                        piece = b30.getTag().toString();
+                        origin = 30;
+                    }
+                }
+                else if(piece.equals(b30.getTag().toString())&& origin == 30){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 30;
+                    evaluate();
+                }
                 break;
             case R.id.b31:
+                if(piece.equals("") && origin == -1) {
+                    if(!b31.getTag().equals("")) {
+                        piece = b31.getTag().toString();
+                        origin = 31;
+                    }
+                }
+                else if(piece.equals(b31.getTag().toString())&& origin == 31){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 31;
+                    evaluate();
+                }
                 break;
             case R.id.b32:
+                if(piece.equals("") && origin == -1) {
+                    if(!b32.getTag().equals("")) {
+                        piece = b32.getTag().toString();
+                        origin = 32;
+                    }
+                }
+                else if(piece.equals(b32.getTag().toString())&& origin == 32){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 32;
+                    evaluate();
+                }
                 break;
             case R.id.b33:
+                if(piece.equals("") && origin == -1) {
+                    if(!b33.getTag().equals("")) {
+                        piece = b33.getTag().toString();
+                        origin = 33;
+                    }
+                }
+                else if(piece.equals(b33.getTag().toString())&& origin == 33){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 33;
+                    evaluate();
+                }
                 break;
             case R.id.b34:
+                if(piece.equals("") && origin == -1) {
+                    if(!b34.getTag().equals("")) {
+                        piece = b34.getTag().toString();
+                        origin = 34;
+                    }
+                }
+                else if(piece.equals(b34.getTag().toString())&& origin == 34){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 34;
+                    evaluate();
+                }
                 break;
             case R.id.b35:
+                if(piece.equals("") && origin == -1) {
+                    if(!b35.getTag().equals("")) {
+                        piece = b35.getTag().toString();
+                        origin = 35;
+                    }
+                }
+                else if(piece.equals(b35.getTag().toString())&& origin == 35){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 35;
+                    evaluate();
+                }
                 break;
             case R.id.b36:
+                if(piece.equals("") && origin == -1) {
+                    if(!b36.getTag().equals("")) {
+                        piece = b36.getTag().toString();
+                        origin = 36;
+                    }
+                }
+                else if(piece.equals(b36.getTag().toString())&& origin == 36){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 36;
+                    evaluate();
+                }
                 break;
             case R.id.b37:
+                if(piece.equals("") && origin == -1) {
+                    if(!b37.getTag().equals("")) {
+                        piece = b37.getTag().toString();
+                        origin = 37;
+                    }
+                }
+                else if(piece.equals(b37.getTag().toString())&& origin == 37){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 37;
+                    evaluate();
+                }
                 break;
             case R.id.b38:
+                if(piece.equals("") && origin == -1) {
+                    if(!b38.getTag().equals("")) {
+                        piece = b38.getTag().toString();
+                        origin = 38;
+                    }
+                }
+                else if(piece.equals(b38.getTag().toString())&& origin == 38){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 38;
+                    evaluate();
+                }
                 break;
             case R.id.b39:
+                if(piece.equals("") && origin == -1) {
+                    if(!b39.getTag().equals("")) {
+                        piece = b39.getTag().toString();
+                        origin = 39;
+                    }
+                }
+                else if(piece.equals(b39.getTag().toString())&& origin == 39){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 39;
+                    evaluate();
+                }
                 break;
             case R.id.b40:
+                if(piece.equals("") && origin == -1) {
+                    if(!b40.getTag().equals("")) {
+                        piece = b40.getTag().toString();
+                        origin = 40;
+                    }
+                }
+                else if(piece.equals(b40.getTag().toString())&& origin == 40){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 40;
+                    evaluate();
+                }
                 break;
             case R.id.b41:
+                if(piece.equals("") && origin == -1) {
+                    if(!b41.getTag().equals("")) {
+                        piece = b41.getTag().toString();
+                        origin = 41;
+                    }
+                }
+                else if(piece.equals(b41.getTag().toString())&& origin == 41){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 41;
+                    evaluate();
+                }
                 break;
             case R.id.b42:
+                if(piece.equals("") && origin == -1) {
+                    if(!b42.getTag().equals("")) {
+                        piece = b42.getTag().toString();
+                        origin = 42;
+                    }
+                }
+                else if(piece.equals(b42.getTag().toString())&& origin == 42){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 42;
+                    evaluate();
+                }
                 break;
             case R.id.b43:
+                if(piece.equals("") && origin == -1) {
+                    if(!b43.getTag().equals("")) {
+                        piece = b43.getTag().toString();
+                        origin = 43;
+                    }
+                }
+                else if(piece.equals(b43.getTag().toString())&& origin == 43){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 43;
+                    evaluate();
+                }
                 break;
             case R.id.b44:
+                if(piece.equals("") && origin == -1) {
+                    if(!b44.getTag().equals("")) {
+                        piece = b44.getTag().toString();
+                        origin = 44;
+                    }
+                }
+                else if(piece.equals(b44.getTag().toString())&& origin == 44){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 44;
+                    evaluate();
+                }
                 break;
             case R.id.b45:
+                if(piece.equals("") && origin == -1) {
+                    if(!b45.getTag().equals("")) {
+                        piece = b45.getTag().toString();
+                        origin = 45;
+                    }
+                }
+                else if(piece.equals(b45.getTag().toString())&& origin == 45){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 45;
+                    evaluate();
+                }
                 break;
             case R.id.b46:
+                if(piece.equals("") && origin == -1) {
+                    if(!b46.getTag().equals("")) {
+                        piece = b46.getTag().toString();
+                        origin = 46;
+                    }
+                }
+                else if(piece.equals(b46.getTag().toString())&& origin == 46){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 46;
+                    evaluate();
+                }
                 break;
             case R.id.b47:
+                if(piece.equals("") && origin == -1) {
+                    if(!b47.getTag().equals("")) {
+                        piece = b47.getTag().toString();
+                        origin = 47;
+                    }
+                }
+                else if(piece.equals(b47.getTag().toString())&& origin == 47){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 47;
+                    evaluate();
+                }
                 break;
             case R.id.b48:
+                if(piece.equals("") && origin == -1) {
+                    if(!b48.getTag().equals("")) {
+                        piece = b48.getTag().toString();
+                        origin = 48;
+                    }
+                }
+                else if(piece.equals(b48.getTag().toString())&& origin == 48){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 48;
+                    evaluate();
+                }
                 break;
             case R.id.b49:
+                if(piece.equals("") && origin == -1) {
+                    if(!b49.getTag().equals("")) {
+                        piece = b49.getTag().toString();
+                        origin = 49;
+                    }
+                }
+                else if(piece.equals(b49.getTag().toString())&& origin == 49){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 49;
+                    evaluate();
+                }
                 break;
             case R.id.b50:
+                if(piece.equals("") && origin == -1) {
+                    if(!b50.getTag().equals("")) {
+                        piece = b50.getTag().toString();
+                        origin = 50;
+                    }
+                }
+                else if(piece.equals(b50.getTag().toString())&& origin == 50){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 50;
+                    evaluate();
+                }
                 break;
             case R.id.b51:
+                if(piece.equals("") && origin == -1) {
+                    if(!b51.getTag().equals("")) {
+                        piece = b51.getTag().toString();
+                        origin = 51;
+                    }
+                }
+                else if(piece.equals(b51.getTag().toString())&& origin == 51){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 51;
+                    evaluate();
+                }
                 break;
             case R.id.b52:
+                if(piece.equals("") && origin == -1) {
+                    if(!b52.getTag().equals("")) {
+                        piece = b52.getTag().toString();
+                        origin = 52;
+                    }
+                }
+                else if(piece.equals(b52.getTag().toString())&& origin == 52){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 52;
+                    evaluate();
+                }
                 break;
             case R.id.b53:
+                if(piece.equals("") && origin == -1) {
+                    if(!b53.getTag().equals("")) {
+                        piece = b53.getTag().toString();
+                        origin = 53;
+                    }
+                }
+                else if(piece.equals(b53.getTag().toString())&& origin == 53){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 53;
+                    evaluate();
+                }
                 break;
             case R.id.b54:
+                if(piece.equals("") && origin == -1) {
+                    if(!b54.getTag().equals("")) {
+                        piece = b54.getTag().toString();
+                        origin = 54;
+                    }
+                }
+                else if(piece.equals(b54.getTag().toString())&& origin == 54){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 54;
+                    evaluate();
+                }
                 break;
             case R.id.b55:
+                if(piece.equals("") && origin == -1) {
+                    if(!b55.getTag().equals("")) {
+                        piece = b55.getTag().toString();
+                        origin = 55;
+                    }
+                }
+                else if(piece.equals(b55.getTag().toString())&& origin == 55){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 55;
+                    evaluate();
+                }
                 break;
             case R.id.b56:
+                if(piece.equals("") && origin == -1) {
+                    if(!b56.getTag().equals("")) {
+                        piece = b56.getTag().toString();
+                        origin = 56;
+                    }
+                }
+                else if(piece.equals(b56.getTag().toString())&& origin == 56){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 56;
+                    evaluate();
+                }
                 break;
             case R.id.b57:
+                if(piece.equals("") && origin == -1) {
+                    if(!b57.getTag().equals("")) {
+                        piece = b57.getTag().toString();
+                        origin = 57;
+                    }
+                }
+                else if(piece.equals(b57.getTag().toString())&& origin == 57){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 57;
+                    evaluate();
+                }
                 break;
             case R.id.b58:
+                if(piece.equals("") && origin == -1) {
+                    if(!b58.getTag().equals("")) {
+                        piece = b58.getTag().toString();
+                        origin = 58;
+                    }
+                }
+                else if(piece.equals(b58.getTag().toString())&& origin == 58){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 58;
+                    evaluate();
+                }
                 break;
             case R.id.b59:
+                if(piece.equals("") && origin == -1) {
+                    if(!b59.getTag().equals("")) {
+                        piece = b59.getTag().toString();
+                        origin = 59;
+                    }
+                }
+                else if(piece.equals(b59.getTag().toString())&& origin == 59){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 59;
+                    evaluate();
+                }
                 break;
             case R.id.b60:
+                if(piece.equals("") && origin == -1) {
+                    if(!b60.getTag().equals("")) {
+                        piece = b60.getTag().toString();
+                        origin = 60;
+                    }
+                }
+                else if(piece.equals(b60.getTag().toString())&& origin == 60){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 60;
+                    evaluate();
+                }
                 break;
             case R.id.b61:
+                if(piece.equals("") && origin == -1) {
+                    if(!b61.getTag().equals("")) {
+                        piece = b61.getTag().toString();
+                        origin = 61;
+                    }
+                }
+                else if(piece.equals(b61.getTag().toString())&& origin == 61){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 61;
+                    evaluate();
+                }
                 break;
             case R.id.b62:
+                if(piece.equals("") && origin == -1) {
+                    if(!b62.getTag().equals("")) {
+                        piece = b62.getTag().toString();
+                        origin = 62;
+                    }
+                }
+                else if(piece.equals(b62.getTag().toString())&& origin == 62){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 62;
+                    evaluate();
+                }
                 break;
             case R.id.b63:
+                if(piece.equals("") && origin == -1) {
+                    if(!b63.getTag().equals("")) {
+                        piece = b63.getTag().toString();
+                        origin = 63;
+                    }
+                }
+                else if(piece.equals(b63.getTag().toString())&& origin == 63){
+                    piece = "";
+                    origin = -1;
+                    Toast.makeText(ChessActivity.this, "Move Cancelled!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    destination = 63;
+                    evaluate();
+                }
                 break;
         }
     }
 
-    private boolean equaluate(String piece, int location, int i) {
-        if(piece.charAt(1) == 'R' || piece.charAt(1) == 'P')
-            return rook(piece, location, i);
+    private void evaluate() {
+        if(turn){
+            if(piece.charAt(0) != 'W'){
+                piece = "";
+                origin = -1;
+                destination = -1;
+                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        else{
+            if(piece.charAt(0) != 'B'){
+                piece = "";
+                origin = -1;
+                destination = -1;
+                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        if(!buttons[destination].getTag().equals("") && buttons[destination].getTag().toString().charAt(0) == piece.charAt(0)){
+            piece = "";
+            origin = -1;
+            destination = -1;
+            Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+        }
+        else if(piece.charAt(1) == 'R')
+            handler.post(rook);
+        else if(piece.charAt(1) == 'N')
+            handler.post(knight);
         else if(piece.charAt(1) == 'B')
-            return false;
-        return false;
+            handler.post(bishop);
+        else if(piece.charAt(1) == 'Q')
+            handler.post(queen);
+        else if(piece.charAt(1) == 'P')
+            handler.post(pawn);
     }
 
-    private boolean rook(String piece, int location, int i) {
-        int j = location + 8;
-        while(j >= 0 && j < 64){
-            if(j == i){
-                buttons[j].setText(piece);
-                buttons[location].setText("");
-                return true;
-            }
-            if(!buttons[j].getText().toString().equals(""))
+    private int getImage() {
+        switch(piece.charAt(1)){
+            case'K':
+                if(piece.charAt(0) == 'W')
+                    return R.drawable.wk;
+                if(piece.charAt(0) == 'B')
+                    return  R.drawable.bk;
                 break;
-            j += 8;
+            case'Q':
+                if(piece.charAt(0) == 'W')
+                    return R.drawable.wq;
+                if(piece.charAt(0) == 'B')
+                    return  R.drawable.bq;
+                break;
+            case'B':
+                if(piece.charAt(0) == 'W')
+                    return R.drawable.wb;
+                if(piece.charAt(0) == 'B')
+                    return  R.drawable.bb;
+                break;
+            case'N':
+                if(piece.charAt(0) == 'W')
+                    return R.drawable.wn;
+                if(piece.charAt(0) == 'B')
+                    return  R.drawable.bn;
+                break;
+            case'R':
+                if(piece.charAt(0) == 'W')
+                    return R.drawable.wr;
+                if(piece.charAt(0) == 'B')
+                    return  R.drawable.br;
+                break;
+            case'P':
+                if(piece.charAt(0) == 'W')
+                    return R.drawable.wp;
+                if(piece.charAt(0) == 'B')
+                    return  R.drawable.bp;
+                break;
+            default:
+                return 0;
         }
-        j = location - 8;
-        while(j >= 0 && j < 64){
-            if(j == i){
-                buttons[j].setText(piece);
-                buttons[location].setText("");
-                return true;
+        return 0;
+    }
+
+    private Runnable queen = new Runnable() {
+        @Override
+        public void run() {
+            validate = false;
+            int j = origin + 8;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                j += 8;
             }
-            if(!buttons[j].getText().toString().equals(""))
-                break;
-            j -= 8;
+            j = origin - 8;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                j -= 8;
+            }
+            j = origin + 1;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals("")){
+                    break;
+                }
+                if((j + 1) % 8 == 0)
+                    break;
+                j += 1;
+            }
+            j = origin - 1;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                if((j - 1) % 8 == 7)
+                    break;
+                j -= 1;
+            }
+            if(!validate)
+                handler.post(bishop);
+            else{
+                destination = -1;
+                origin = -1;
+                piece = "";
+            }
+            if(validate) {
+                if(turn){
+                    for(int i = 0; i < 8; i++)
+                        blackPawns[i] = false;
+                }
+                else{
+                    for(int i = 0; i < 8; i++)
+                        whitePawns[i] = false;
+                }
+                turn = !turn;
+            }
         }
-        j = location + 1;
-        while(j >= 0 && j < 64){
-            if(j == i){
-                buttons[j].setText(piece);
-                buttons[location].setText("");
-                return true;
+    };
+    
+    private Runnable knight = new Runnable() {
+        @Override
+        public void run() {
+            validate = false;            
+            switch(origin - destination){
+                case 10:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                case 15:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                case 17:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                case 6:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                case -10:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                case -15:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                case -17:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                case -6:
+                    if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
+                            || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        buttons[destination].setTag(piece);
+                        buttons[destination].setImageResource(getImage());
+                        buttons[origin].setTag("");
+                        buttons[origin].setImageResource(0);
+                        validate = true;
+                    }
+                    break;
+                default:
+                    Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
             }
-            if(!buttons[j].getText().toString().equals("")){
-                break;
+            destination = -1;
+            origin = -1;
+            piece = "";
+            if(validate) {
+                if(turn){
+                    for(int i = 0; i < 8; i++)
+                        blackPawns[i] = false;
+                }
+                else{
+                    for(int i = 0; i < 8; i++)
+                        whitePawns[i] = false;
+                }
+                turn = !turn;
             }
-            if(j % 8 == 0 && (j + 1) % 8 == 1)
-                break;
-            j += 1;
         }
-        j = location - 1;
-        while(j >= 0 && j < 64){
-            if(j == i){
-                buttons[j].setText(piece);
-                buttons[location].setText("");
-                return true;
+    };
+
+    private Runnable rook = new Runnable() {
+        @Override
+        public void run() {
+            validate = false;
+            int j = origin + 8;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                j += 8;
             }
-            if(!buttons[j].getText().toString().equals(""))
-                break;
-            if(j % 8 ==1 && (j - 1) % 8 == 0)
-                break;
-            j -= 1;
+            j = origin - 8;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                j -= 8;
+            }
+            j = origin + 1;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals("")){
+                    break;
+                }
+                if((j + 1) % 8 == 0)
+                    break;
+                j += 1;
+            }
+            j = origin - 1;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                if((j - 1) % 8 == 7)
+                    break;
+                j -= 1;
+            }
+            if(!validate)
+                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+            else {
+                if(turn){
+                    for(int i = 0; i < 8; i++)
+                        blackPawns[i] = false;
+                }
+                else{
+                    for(int i = 0; i < 8; i++)
+                        whitePawns[i] = false;
+                }
+                turn = !turn;
+            }
+            destination = -1;
+            origin = -1;
+            piece = "";
         }
-        return false;
+    };
+
+    private Runnable bishop = new Runnable() {
+        @Override
+        public void run() {
+            validate = false;
+            int j = origin + 9;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                if(j  % 8 == 7)
+                    break;
+                j += 9;
+            }
+            j = origin + 7;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                if(j  % 8 == 0)
+                    break;
+                j += 7;
+            }
+            j = origin - 9;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals("")){
+                    break;
+                }
+                if(j  % 8 == 0)
+                    break;
+                j -= 9;
+            }
+            j = origin - 7;
+            while(j >= 0 && j < 64){
+                if(j == destination){
+                    buttons[destination].setTag(piece);
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setTag("");
+                    buttons[origin].setImageResource(0);
+                    validate = true;
+                }
+                if(!buttons[j].getTag().toString().equals(""))
+                    break;
+                if(j  % 8 == 7)
+                    break;
+                j -= 7;
+            }
+            if(!validate)
+                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+            else {
+                if(turn){
+                    for(int i = 0; i < 8; i++)
+                        blackPawns[i] = false;
+                }
+                else{
+                    for(int i = 0; i < 8; i++)
+                        whitePawns[i] = false;
+                }
+                turn = !turn;
+            }
+            destination = -1;
+            origin = -1;
+            piece = "";
+        }
+    };
+
+    private Runnable pawn = new Runnable() {
+        @Override
+        public void run() {
+            validate = false;
+            switch(piece.charAt(0)){
+                case'W':
+                    switch(origin - destination){
+                        case 7:
+                            if(!buttons[destination].getTag().equals("") &&
+                                    buttons[destination].getTag().toString().charAt(0) == 'B') {
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                            }
+                            if(destination > 15 && destination < 24){
+                                if(blackPawns[destination + 8 - 24]){
+                                    buttons[destination + 8].setTag("");
+                                    buttons[destination + 8].setImageResource(0);
+                                    buttons[destination].setTag(piece);
+                                    buttons[destination].setImageResource(getImage());
+                                    buttons[origin].setTag("");
+                                    buttons[origin].setImageResource(0);
+                                    validate = true;
+                                }
+                            }
+                            break;
+                        case 8:
+                            if(buttons[destination].getTag().equals("")) {
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                            }
+                            break;
+                        case 9:
+                            if(!buttons[destination].getTag().equals("")
+                                    && buttons[destination].getTag().toString().charAt(0) == 'B') {
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                            }
+                            if(destination > 15 && destination < 24){
+                                if(blackPawns[destination + 8 - 24]){
+                                    buttons[destination + 8].setTag("");
+                                    buttons[destination + 8].setImageResource(0);
+                                    buttons[destination].setTag(piece);
+                                    buttons[destination].setImageResource(getImage());
+                                    buttons[origin].setTag("");
+                                    buttons[origin].setImageResource(0);
+                                    validate = true;
+                                }
+                            }
+                            break;
+                        case 16:
+                            if(origin / 8 == 6 && buttons[destination + 8].getTag().equals("")
+                                    && buttons[destination].getTag().equals("")){
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                                whitePawns[destination - 32] = true;
+                            }
+                            break;
+                    }
+                    break;
+                case'B':
+                    switch(destination - origin){
+                        case 7:
+                            if(!buttons[destination].getTag().equals("")
+                                    && buttons[destination].getTag().toString().charAt(0) == 'W') {
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                            }
+                            if(destination > 39 && destination < 48){
+                                if(whitePawns[destination - 8 - 32]){
+                                    buttons[destination - 8].setTag("");
+                                    buttons[destination - 8].setImageResource(0);
+                                    buttons[destination].setTag(piece);
+                                    buttons[destination].setImageResource(getImage());
+                                    buttons[origin].setTag("");
+                                    buttons[origin].setImageResource(0);
+                                    validate = true;
+                                }
+                            }
+                            break;
+                        case 8:
+                            if(buttons[destination].getTag().equals("")) {
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                            }
+                            break;
+                        case 9:
+                            if(!buttons[destination].getTag().equals("")
+                                    && buttons[destination].getTag().toString().charAt(0) == 'W') {
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                            }
+                            if(destination > 39 && destination < 48){
+                                if(whitePawns[destination - 8 - 32]){
+                                    buttons[destination - 8].setTag("");
+                                    buttons[destination - 8].setImageResource(0);
+                                    buttons[destination].setTag(piece);
+                                    buttons[destination].setImageResource(getImage());
+                                    buttons[origin].setTag("");
+                                    buttons[origin].setImageResource(0);
+                                    validate = true;
+                                }
+                            }
+                            break;
+                        case 16:
+                            if(origin / 8 == 1 && buttons[destination - 8].getTag().equals("")
+                                    && buttons[destination].getTag().equals("")){
+                                buttons[destination].setTag(piece);
+                                buttons[destination].setImageResource(getImage());
+                                buttons[origin].setTag("");
+                                buttons[origin].setImageResource(0);
+                                validate = true;
+                                blackPawns[destination - 24] = true;
+                            }
+                            break;
+                    }
+                    break;
+            }
+            if(!validate)
+                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+            else {
+                if(turn){
+                    for(int i = 0; i < 8; i++)
+                        blackPawns[i] = false;
+                    if(destination < 8){
+                        pawnPromotion = destination;
+                        Intent WhitePawn = new Intent(ChessActivity.this, PawnDialog.class);
+                        startActivityForResult(WhitePawn, white);
+                    }
+                }
+                else{
+                    for(int i = 0; i < 8; i++)
+                        whitePawns[i] = false;
+                    if(destination > 55){
+                        pawnPromotion = destination;
+                        Intent BlackPawn = new Intent(ChessActivity.this, BpawnDialog.class);
+                        startActivityForResult(BlackPawn, black);
+                    }
+                }
+                turn = !turn;
+            }
+            destination = -1;
+            origin = -1;
+            piece = "";
+        }
+    };
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case white :
+                if (resultCode == Activity.RESULT_OK) {
+                    piece = data.getStringExtra("White");
+                    buttons[pawnPromotion].setTag(piece);
+                    buttons[pawnPromotion].setImageResource(getImage());
+                }
+                break;
+            case black:
+                if (resultCode == Activity.RESULT_OK) {
+                    piece = data.getStringExtra("Black");
+                    buttons[pawnPromotion].setTag(piece);
+                    buttons[pawnPromotion].setImageResource(getImage());
+                }
+                break;
+        }
     }
 }
