@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -18,9 +18,14 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
     private boolean turn;
     private boolean[] whitePawns;
     private boolean[] blackPawns;
+    private boolean enpasse;
+    private int enpasse_loc;
     private static final int white = 1;
     private static final int black = 2;
     private int pawnPromotion;
+    private String savedTag;
+    private int whiteKing;
+    private int blackKing;
     private ImageButton b0;
     private ImageButton b1;
     private ImageButton b2;
@@ -96,6 +101,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
         origin = -1;
         destination = -1;
         pawnPromotion = -1;
+        savedTag = "";
+        enpasse=false;
+        enpasse_loc = -1;
         whitePawns = new boolean[]{false, false, false, false, false, false, false, false};
         blackPawns = new boolean[]{false, false, false, false, false, false, false, false};
         b0 = (ImageButton) findViewById(R.id.b0);
@@ -171,6 +179,7 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
         b3.setTag("BQ");
         b3.setImageResource(R.drawable.bq);
         b4.setTag("BK");
+        blackKing = 4;
         b4.setImageResource(R.drawable.bk);
         b5.setTag("BB");
         b5.setImageResource(R.drawable.bb);
@@ -283,6 +292,7 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
         b59.setTag("WQ");
         b59.setImageResource(R.drawable.wq);
         b60.setTag("WK");
+        whiteKing = 60;
         b60.setImageResource(R.drawable.wk);
         b61.setTag("WB");
         b61.setImageResource(R.drawable.wb);
@@ -360,7 +370,6 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 b48, b49, b50, b51, b52, b53, b54, b55, b56, b57, b58, b59, b60, b61, b62, b63};
     }
 
-    @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.b0:
@@ -1461,7 +1470,7 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 piece = "";
                 origin = -1;
                 destination = -1;
-                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ChessActivity.this, "It's white turn!", Toast.LENGTH_LONG).show();
                 return;
             }
         }
@@ -1470,7 +1479,7 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 piece = "";
                 origin = -1;
                 destination = -1;
-                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ChessActivity.this, "It's black turn!", Toast.LENGTH_LONG).show();
                 return;
             }
         }
@@ -1543,10 +1552,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             int j = origin + 8;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1556,10 +1564,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin - 8;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1569,10 +1576,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin + 1;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals("")){
@@ -1585,10 +1591,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin - 1;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1600,20 +1605,14 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             if(!validate)
                 handler.post(bishop);
             else{
-                destination = -1;
-                origin = -1;
-                piece = "";
-            }
-            if(validate) {
-                if(turn){
-                    for(int i = 0; i < 8; i++)
-                        blackPawns[i] = false;
+                if(turn) {
+                    Check check = new Check(whiteKing);
+                    handler.post(check);
                 }
                 else{
-                    for(int i = 0; i < 8; i++)
-                        whitePawns[i] = false;
+                    Check check = new Check(blackKing);
+                    handler.post(check);
                 }
-                turn = !turn;
             }
         }
     };
@@ -1626,99 +1625,92 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 case 10:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 case 15:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 case 17:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 case 6:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 case -10:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 case -15:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 case -17:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 case -6:
                     if((origin % 8 == (destination % 8 - 1)) || (origin % 8 == (destination % 8 - 2))
                             || (origin % 8 == (destination % 8 + 1)) || (origin % 8 == (destination % 8 + 2))) {
+                        savedTag = buttons[destination].getTag().toString();
                         buttons[destination].setTag(piece);
-                        buttons[destination].setImageResource(getImage());
                         buttons[origin].setTag("");
-                        buttons[origin].setImageResource(0);
                         validate = true;
                     }
                     break;
                 default:
                     Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
             }
-            destination = -1;
-            origin = -1;
-            piece = "";
             if(validate) {
-                if(turn){
-                    for(int i = 0; i < 8; i++)
-                        blackPawns[i] = false;
+                if(turn) {
+                    Check check = new Check(whiteKing);
+                    handler.post(check);
                 }
                 else{
-                    for(int i = 0; i < 8; i++)
-                        whitePawns[i] = false;
+                    Check check = new Check(blackKing);
+                    handler.post(check);
                 }
-                turn = !turn;
+            }
+            else{
+                destination = -1;
+                origin = -1;
+                piece = "";
             }
         }
     };
@@ -1730,10 +1722,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             int j = origin + 8;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1743,10 +1734,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin - 8;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1756,10 +1746,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin + 1;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals("")){
@@ -1772,10 +1761,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin - 1;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1784,22 +1772,22 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                     break;
                 j -= 1;
             }
-            if(!validate)
+            if(!validate) {
+                destination = -1;
+                origin = -1;
+                piece = "";
                 Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+            }
             else {
-                if(turn){
-                    for(int i = 0; i < 8; i++)
-                        blackPawns[i] = false;
+                if(turn) {
+                    Check check = new Check(whiteKing);
+                    handler.post(check);
                 }
                 else{
-                    for(int i = 0; i < 8; i++)
-                        whitePawns[i] = false;
+                    Check check = new Check(blackKing);
+                    handler.post(check);
                 }
-                turn = !turn;
             }
-            destination = -1;
-            origin = -1;
-            piece = "";
         }
     };
 
@@ -1810,10 +1798,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             int j = origin + 9;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1825,10 +1812,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin + 7;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1840,10 +1826,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin - 9;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals("")){
@@ -1856,10 +1841,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             j = origin - 7;
             while(j >= 0 && j < 64){
                 if(j == destination){
+                    savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
-                    buttons[destination].setImageResource(getImage());
                     buttons[origin].setTag("");
-                    buttons[origin].setImageResource(0);
                     validate = true;
                 }
                 if(!buttons[j].getTag().toString().equals(""))
@@ -1868,22 +1852,22 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                     break;
                 j -= 7;
             }
-            if(!validate)
+            if(!validate) {
+                destination = -1;
+                origin = -1;
+                piece = "";
                 Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+            }
             else {
-                if(turn){
-                    for(int i = 0; i < 8; i++)
-                        blackPawns[i] = false;
+                if(turn) {
+                    Check check = new Check(whiteKing);
+                    handler.post(check);
                 }
                 else{
-                    for(int i = 0; i < 8; i++)
-                        whitePawns[i] = false;
+                    Check check = new Check(blackKing);
+                    handler.post(check);
                 }
-                turn = !turn;
             }
-            destination = -1;
-            origin = -1;
-            piece = "";
         }
     };
 
@@ -1897,50 +1881,47 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                         case 7:
                             if(!buttons[destination].getTag().equals("") &&
                                     buttons[destination].getTag().toString().charAt(0) == 'B') {
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                             }
                             if(destination > 15 && destination < 24){
                                 if(blackPawns[destination + 8 - 24]){
+                                    enpasse = true;
+                                    enpasse_loc = destination + 8;
+                                    savedTag = buttons[enpasse_loc].getTag().toString();
                                     buttons[destination + 8].setTag("");
-                                    buttons[destination + 8].setImageResource(0);
                                     buttons[destination].setTag(piece);
-                                    buttons[destination].setImageResource(getImage());
                                     buttons[origin].setTag("");
-                                    buttons[origin].setImageResource(0);
                                     validate = true;
                                 }
                             }
                             break;
                         case 8:
                             if(buttons[destination].getTag().equals("")) {
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                             }
                             break;
                         case 9:
                             if(!buttons[destination].getTag().equals("")
                                     && buttons[destination].getTag().toString().charAt(0) == 'B') {
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                             }
                             if(destination > 15 && destination < 24){
                                 if(blackPawns[destination + 8 - 24]){
+                                    enpasse = true;
+                                    enpasse_loc = destination + 8;
+                                    savedTag = buttons[enpasse_loc].getTag().toString();
                                     buttons[destination + 8].setTag("");
-                                    buttons[destination + 8].setImageResource(0);
                                     buttons[destination].setTag(piece);
-                                    buttons[destination].setImageResource(getImage());
                                     buttons[origin].setTag("");
-                                    buttons[origin].setImageResource(0);
                                     validate = true;
                                 }
                             }
@@ -1948,10 +1929,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                         case 16:
                             if(origin / 8 == 6 && buttons[destination + 8].getTag().equals("")
                                     && buttons[destination].getTag().equals("")){
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                                 whitePawns[destination - 32] = true;
                             }
@@ -1963,50 +1943,47 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                         case 7:
                             if(!buttons[destination].getTag().equals("")
                                     && buttons[destination].getTag().toString().charAt(0) == 'W') {
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                             }
                             if(destination > 39 && destination < 48){
                                 if(whitePawns[destination - 8 - 32]){
+                                    enpasse = true;
+                                    enpasse_loc = destination - 8;
+                                    savedTag = buttons[enpasse_loc].getTag().toString();
                                     buttons[destination - 8].setTag("");
-                                    buttons[destination - 8].setImageResource(0);
                                     buttons[destination].setTag(piece);
-                                    buttons[destination].setImageResource(getImage());
                                     buttons[origin].setTag("");
-                                    buttons[origin].setImageResource(0);
                                     validate = true;
                                 }
                             }
                             break;
                         case 8:
                             if(buttons[destination].getTag().equals("")) {
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                             }
                             break;
                         case 9:
                             if(!buttons[destination].getTag().equals("")
                                     && buttons[destination].getTag().toString().charAt(0) == 'W') {
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                             }
                             if(destination > 39 && destination < 48){
                                 if(whitePawns[destination - 8 - 32]){
+                                    enpasse = true;
+                                    enpasse_loc = destination - 8;
+                                    savedTag = buttons[enpasse_loc].getTag().toString();
                                     buttons[destination - 8].setTag("");
-                                    buttons[destination - 8].setImageResource(0);
                                     buttons[destination].setTag(piece);
-                                    buttons[destination].setImageResource(getImage());
                                     buttons[origin].setTag("");
-                                    buttons[origin].setImageResource(0);
                                     validate = true;
                                 }
                             }
@@ -2014,10 +1991,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                         case 16:
                             if(origin / 8 == 1 && buttons[destination - 8].getTag().equals("")
                                     && buttons[destination].getTag().equals("")){
+                                savedTag = buttons[destination].getTag().toString();
                                 buttons[destination].setTag(piece);
-                                buttons[destination].setImageResource(getImage());
                                 buttons[origin].setTag("");
-                                buttons[origin].setImageResource(0);
                                 validate = true;
                                 blackPawns[destination - 24] = true;
                             }
@@ -2025,32 +2001,18 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                     }
                     break;
             }
-            if(!validate)
+            if(!validate) {
                 Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
-            else {
-                if(turn){
-                    for(int i = 0; i < 8; i++)
-                        blackPawns[i] = false;
-                    if(destination < 8){
-                        pawnPromotion = destination;
-                        Intent WhitePawn = new Intent(ChessActivity.this, PawnDialog.class);
-                        startActivityForResult(WhitePawn, white);
-                    }
-                }
-                else{
-                    for(int i = 0; i < 8; i++)
-                        whitePawns[i] = false;
-                    if(destination > 55){
-                        pawnPromotion = destination;
-                        Intent BlackPawn = new Intent(ChessActivity.this, BpawnDialog.class);
-                        startActivityForResult(BlackPawn, black);
-                    }
-                }
-                turn = !turn;
+                destination = -1;
+                origin = -1;
+                piece = "";
             }
-            destination = -1;
-            origin = -1;
-            piece = "";
+            else {
+                if(turn)
+                    handler.post(new Check(whiteKing));
+                else
+                    handler.post(new Check(blackKing));
+            }
         }
     };
 
@@ -2062,6 +2024,7 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                     piece = data.getStringExtra("White");
                     buttons[pawnPromotion].setTag(piece);
                     buttons[pawnPromotion].setImageResource(getImage());
+                    piece = "";
                 }
                 break;
             case black:
@@ -2069,8 +2032,322 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                     piece = data.getStringExtra("Black");
                     buttons[pawnPromotion].setTag(piece);
                     buttons[pawnPromotion].setImageResource(getImage());
+                    piece = "";
                 }
                 break;
+        }
+    }
+
+    private class Check implements Runnable{
+
+        private int squareNum;
+        
+        Check(int squareNum){
+            this.squareNum = squareNum;
+        }
+
+        public void run() {
+            boolean check = false;
+            if(turn){
+                if(true){
+                    int j = squareNum + 8;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        j += 8;
+                    }
+                    j = squareNum - 8;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        j -= 8;
+                    }
+                    j = squareNum + 1;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals("")){
+                            break;
+                        }
+                        if((j + 1) % 8 == 0)
+                            break;
+                        j += 1;
+                    }
+                    j = squareNum - 1;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if((j - 1) % 8 == 7)
+                            break;
+                        j -= 1;
+                    }
+                }
+                if(!check){
+                    int j = squareNum + 9;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if(j  % 8 == 7)
+                            break;
+                        j += 9;
+                    }
+                    j = squareNum + 7;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if(j  % 8 == 0)
+                            break;
+                        j += 7;
+                    }
+                    j = squareNum - 9;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals("")){
+                            break;
+                        }
+                        if(j  % 8 == 0)
+                            break;
+                        j -= 9;
+                    }
+                    j = squareNum - 7;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if(j  % 8 == 7)
+                            break;
+                        j -= 7;
+                    }
+                }
+                if (!check){
+                    if((squareNum + 6) < 64 && ((squareNum + 6) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum + 6].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 10) > 0 && ((squareNum - 10) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum - 10].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 17) > 0 && ((squareNum - 17) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum - 17].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum + 15) < 64 && ((squareNum + 15) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum + 15].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 15) > 0 && ((squareNum - 15) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum - 15].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum + 17) < 64 && ((squareNum + 17) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum + 17].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 6) > 0 && ((squareNum - 6) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum - 6].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum + 10) < 64 && ((squareNum + 10) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum + 10].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                }
+                if(!check && squareNum > 15){
+                    if(squareNum % 8 == (squareNum - 7) % 8 - 1 && (buttons[squareNum - 7].getTag().toString().equals("BP")))
+                        check = true;
+                    else if(squareNum % 8 == (squareNum - 9) % 8 + 1 && (buttons[squareNum - 9].getTag().toString().equals("BP")))
+                        check = true;
+                }
+            }
+            else{
+                if(!check){
+                    int j = squareNum + 8;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        j += 8;
+                    }
+                    j = squareNum - 8;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        j -= 8;
+                    }
+                    j = squareNum + 1;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals("")){
+                            break;
+                        }
+                        if((j + 1) % 8 == 0)
+                            break;
+                        j += 1;
+                    }
+                    j = squareNum - 1;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if((j - 1) % 8 == 7)
+                            break;
+                        j -= 1;
+                    }
+                }
+                if(!check){
+                    int j = squareNum + 9;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if(j  % 8 == 7)
+                            break;
+                        j += 9;
+                    }
+                    j = squareNum + 7;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if(j  % 8 == 0)
+                            break;
+                        j += 7;
+                    }
+                    j = squareNum - 9;
+                    while(j >= 0 && j < 64 &&!check){
+                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals("")){
+                            break;
+                        }
+                        if(j  % 8 == 0)
+                            break;
+                        j -= 9;
+                    }
+                    j = squareNum - 7;
+                    while(j >= 0 && j < 64 && !check){
+                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                            check = true;
+                        if(!buttons[j].getTag().toString().equals(""))
+                            break;
+                        if(j  % 8 == 7)
+                            break;
+                        j -= 7;
+                    }
+
+                }
+                if(!check){
+                    if((squareNum + 6) < 64 && ((squareNum + 6) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum + 6].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 10) > 0 && ((squareNum - 10) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum - 10].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 17) > 0 && ((squareNum - 17) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum - 17].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum + 15) < 64 && ((squareNum + 15) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum + 15].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 15) > 0 && ((squareNum - 15) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum - 15].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum + 17) < 64 && ((squareNum + 17) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum + 17].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 6) > 0 && ((squareNum - 6) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum - 6].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum + 10) < 64 && ((squareNum + 10) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum + 10].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                }
+                if(!check && squareNum < 48){
+                    if(squareNum % 8 == (squareNum + 7) % 8 + 1 && (buttons[squareNum + 7].getTag().toString().equals("WP")))
+                        check = true;
+                    else if (squareNum % 8 == (squareNum + 9) % 8 - 1 && (buttons[squareNum + 9].getTag().toString().equals("WP")))
+                        check = true;
+                }
+            }
+            if(check){
+                if(enpasse){
+                    enpasse = false;
+                    buttons[enpasse_loc].setTag(savedTag);
+                    buttons[origin].setTag(piece);
+                    buttons[destination].setTag("");
+                }
+                else {
+                    buttons[destination].setTag(savedTag);
+                    buttons[origin].setTag(piece);
+                }
+                if(turn)
+                    Toast.makeText(ChessActivity.this, "White King is Under Check!", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(ChessActivity.this, "Black King is Under Check!", Toast.LENGTH_LONG).show();
+            }
+            else{
+                if(enpasse){
+                    enpasse = false;
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setImageResource(0);
+                    buttons[enpasse_loc].setImageResource(0);
+
+                }
+                else{
+                    buttons[destination].setImageResource(getImage());
+                    buttons[origin].setImageResource(0);
+                }
+                if(turn){
+                    for(int i = 0; i < 8; i++)
+                        blackPawns[i] = false;
+                    if(destination < 8 && buttons[destination].getTag().toString().charAt(1) == 'P'){
+                        pawnPromotion = destination;
+                        Intent WhitePawn = new Intent(ChessActivity.this, PawnDialog.class);
+                        startActivityForResult(WhitePawn, white);
+                    }
+                }
+                else{
+                    for(int i = 0; i < 8; i++)
+                        whitePawns[i] = false;
+                    if(destination > 55 && buttons[destination].getTag().toString().charAt(1) == 'P'){
+                        pawnPromotion = destination;
+                        Intent BlackPawn = new Intent(ChessActivity.this, BpawnDialog.class);
+                        startActivityForResult(BlackPawn, black);
+                    }
+                }
+                turn = !turn;
+            }
+            destination = -1;
+            origin = -1;
+            piece = "";
         }
     }
 }

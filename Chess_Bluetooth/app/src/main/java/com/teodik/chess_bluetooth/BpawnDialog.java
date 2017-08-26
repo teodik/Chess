@@ -7,10 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-/**
- * Created by teodik on 8/23/2017.
- */
-
 public class BpawnDialog extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton queen;
@@ -36,7 +32,7 @@ public class BpawnDialog extends AppCompatActivity implements View.OnClickListen
         bishop.setOnClickListener(this);
         resultIntent = new Intent();
     }
-    @Override
+
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.imageButton7:
