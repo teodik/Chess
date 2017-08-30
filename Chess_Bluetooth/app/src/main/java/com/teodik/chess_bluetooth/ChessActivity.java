@@ -35,7 +35,6 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
     private boolean leftBlackRook;
     private boolean rightBlackRook;
     private boolean castle;
-   // private boolean castle1;
     private ImageButton b0;
     private ImageButton b1;
     private ImageButton b2;
@@ -123,7 +122,6 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
         leftWhiteRook = true;
         rightWhiteRook = true;
         castle = false;
-        //castle1 = false;
         b0 = (ImageButton) findViewById(R.id.b0);
         b1 = (ImageButton) findViewById(R.id.b1);
         b2 = (ImageButton) findViewById(R.id.b2);
@@ -2615,9 +2613,9 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                     buttons[origin].setTag(piece);
                 }
                 if(turn)
-                    Toast.makeText(ChessActivity.this, "White King is Under Check!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChessActivity.this, "White King is/wouold be Under Check!", Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(ChessActivity.this, "Black King is Under Check!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChessActivity.this, "Black King is/would be Under Check!", Toast.LENGTH_LONG).show();
             }
             else {
                 if (enpasse) {
@@ -2958,20 +2956,10 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
             if(check){
-//                if(enpasse){
-//                    enpasse = false;
-//                    buttons[enpasse_loc].setTag(savedTag);
-//                    buttons[origin].setTag(piece);
-//                    buttons[destination].setTag("");
-//                }
-//                else {
-//                    buttons[destination].setTag(savedTag);
-//                    buttons[origin].setTag(piece);
-//                }
                 if(turn)
-                    Toast.makeText(ChessActivity.this, "White King is Under Check!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChessActivity.this, "White King is/would be Under Check!", Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(ChessActivity.this, "Black King is Under Check!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChessActivity.this, "Black King is/would be Under Check!", Toast.LENGTH_LONG).show();
                 castle = false;
                 destination = -1;
                 origin = -1;
