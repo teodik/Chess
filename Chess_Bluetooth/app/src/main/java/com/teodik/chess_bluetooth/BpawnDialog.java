@@ -1,5 +1,7 @@
 package com.teodik.chess_bluetooth;
 
+/*Teodik Meserkhani August 2017*/
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +11,15 @@ import android.widget.ImageButton;
 
 public class BpawnDialog extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton queen;
-    private ImageButton rook;
-    private ImageButton knight;
-    private ImageButton bishop;
     private Intent resultIntent;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_bpawn);
+        ImageButton queen;
+        ImageButton rook;
+        ImageButton knight;
+        ImageButton bishop;
         queen = (ImageButton) findViewById(R.id.imageButton7);
         rook = (ImageButton) findViewById(R.id.imageButton8);
         knight = (ImageButton) findViewById(R.id.imageButton6);

@@ -1,5 +1,7 @@
 package com.teodik.chess_bluetooth;
 
+/*Teodik Meserkhani August 2017*/
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +28,14 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
     private String savedTag;
     private int whiteKing;
     private int blackKing;
+    private boolean kingWhite;
+    private boolean leftWhiteRook;
+    private boolean rightWhiteRook;
+    private boolean kingBlack;
+    private boolean leftBlackRook;
+    private boolean rightBlackRook;
+    private boolean castle;
+   // private boolean castle1;
     private ImageButton b0;
     private ImageButton b1;
     private ImageButton b2;
@@ -106,6 +116,14 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
         enpasse_loc = -1;
         whitePawns = new boolean[]{false, false, false, false, false, false, false, false};
         blackPawns = new boolean[]{false, false, false, false, false, false, false, false};
+        kingBlack = true;
+        kingWhite = true;
+        leftBlackRook = true;
+        rightBlackRook = true;
+        leftWhiteRook = true;
+        rightWhiteRook = true;
+        castle = false;
+        //castle1 = false;
         b0 = (ImageButton) findViewById(R.id.b0);
         b1 = (ImageButton) findViewById(R.id.b1);
         b2 = (ImageButton) findViewById(R.id.b2);
@@ -1499,6 +1517,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             handler.post(queen);
         else if(piece.charAt(1) == 'P')
             handler.post(pawn);
+        else if(piece.charAt(1) == 'K')
+            handler.post(king);
     }
 
     private int getImage() {
@@ -1544,6 +1564,295 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
         }
         return 0;
     }
+
+    public boolean kingCheck(){
+        if(destination % 8 == 0 && destination / 8 == 0){
+            if(turn) {
+                if (buttons[destination + 1].getTag().toString().equals("BK")
+                        || buttons[destination + 9].getTag().toString().equals("BK")
+                        || buttons[destination + 8].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination + 1].getTag().toString().equals("WK")
+                        || buttons[destination + 9].getTag().toString().equals("WK")
+                        || buttons[destination + 8].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else if(destination % 8 == 0 && destination / 8 == 7){
+            if(turn) {
+                if (buttons[destination + 1].getTag().toString().equals("BK")
+                        || buttons[destination -7 ].getTag().toString().equals("BK")
+                        || buttons[destination - 8].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination + 1].getTag().toString().equals("WK")
+                        || buttons[destination - 7].getTag().toString().equals("WK")
+                        || buttons[destination - 8].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else if(destination % 8 == 7 && destination / 8 == 7){
+            if(turn) {
+                if (buttons[destination - 1].getTag().toString().equals("BK")
+                        || buttons[destination - 9].getTag().toString().equals("BK")
+                        || buttons[destination - 8].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination - 1].getTag().toString().equals("WK")
+                        || buttons[destination - 9].getTag().toString().equals("WK")
+                        || buttons[destination - 8].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else if(destination % 8 == 7 && destination / 8 == 0){
+            if(turn) {
+                if (buttons[destination - 1].getTag().toString().equals("BK")
+                        || buttons[destination + 7].getTag().toString().equals("BK")
+                        || buttons[destination + 8].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination - 1].getTag().toString().equals("WK")
+                        || buttons[destination + 7].getTag().toString().equals("WK")
+                        || buttons[destination + 8].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else if(destination / 8 == 0){
+            if(turn) {
+                if (buttons[destination - 1].getTag().toString().equals("BK")
+                        || buttons[destination + 7].getTag().toString().equals("BK")
+                        || buttons[destination + 8].getTag().toString().equals("BK")
+                        || buttons[destination + 9].getTag().toString().equals("BK")
+                        || buttons[destination + 1].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination - 1].getTag().toString().equals("WK")
+                        || buttons[destination + 7].getTag().toString().equals("WK")
+                        || buttons[destination + 8].getTag().toString().equals("WK")
+                        || buttons[destination + 9].getTag().toString().equals("WK")
+                        || buttons[destination + 1].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else if(destination / 8 == 7){
+            if(turn) {
+                if (buttons[destination - 1].getTag().toString().equals("BK")
+                        || buttons[destination - 7].getTag().toString().equals("BK")
+                        || buttons[destination - 8].getTag().toString().equals("BK")
+                        || buttons[destination - 9].getTag().toString().equals("BK")
+                        || buttons[destination + 1].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination - 1].getTag().toString().equals("WK")
+                        || buttons[destination - 7].getTag().toString().equals("WK")
+                        || buttons[destination - 8].getTag().toString().equals("WK")
+                        || buttons[destination - 9].getTag().toString().equals("WK")
+                        || buttons[destination + 1].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else if(destination % 8 == 0){
+            if(turn) {
+                if (buttons[destination - 8].getTag().toString().equals("BK")
+                        || buttons[destination - 7].getTag().toString().equals("BK")
+                        || buttons[destination + 8].getTag().toString().equals("BK")
+                        || buttons[destination + 9].getTag().toString().equals("BK")
+                        || buttons[destination + 1].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination - 8].getTag().toString().equals("WK")
+                        || buttons[destination - 7].getTag().toString().equals("WK")
+                        || buttons[destination + 8].getTag().toString().equals("WK")
+                        || buttons[destination + 9].getTag().toString().equals("WK")
+                        || buttons[destination + 1].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else if(destination % 8 == 7){
+            if(turn) {
+                if (buttons[destination - 1].getTag().toString().equals("BK")
+                        || buttons[destination + 7].getTag().toString().equals("BK")
+                        || buttons[destination + 8].getTag().toString().equals("BK")
+                        || buttons[destination - 9].getTag().toString().equals("BK")
+                        || buttons[destination - 8].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination - 1].getTag().toString().equals("WK")
+                        || buttons[destination + 7].getTag().toString().equals("WK")
+                        || buttons[destination + 8].getTag().toString().equals("WK")
+                        || buttons[destination - 9].getTag().toString().equals("WK")
+                        || buttons[destination - 8].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        else{
+            if(turn) {
+                if (buttons[destination - 1].getTag().toString().equals("BK")
+                        || buttons[destination + 7].getTag().toString().equals("BK")
+                        || buttons[destination + 8].getTag().toString().equals("BK")
+                        || buttons[destination - 9].getTag().toString().equals("BK")
+                        || buttons[destination - 8].getTag().toString().equals("BK")
+                        || buttons[destination + 1].getTag().toString().equals("BK")
+                        || buttons[destination - 7].getTag().toString().equals("BK")
+                        || buttons[destination + 9].getTag().toString().equals("BK"))
+                    return false;
+            }
+            else{
+                if (buttons[destination - 1].getTag().toString().equals("WK")
+                        || buttons[destination + 7].getTag().toString().equals("WK")
+                        || buttons[destination + 8].getTag().toString().equals("WK")
+                        || buttons[destination - 9].getTag().toString().equals("WK")
+                        || buttons[destination - 8].getTag().toString().equals("WK")
+                        || buttons[destination + 1].getTag().toString().equals("WK")
+                        || buttons[destination - 7].getTag().toString().equals("WK")
+                        || buttons[destination + 9].getTag().toString().equals("WK"))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    private Runnable king = new Runnable() {
+        @Override
+        public void run() {
+            validate = false;
+            switch(origin - destination){
+                case -9:
+                    if(destination % 8 == origin % 8 + 1){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case -8:
+                    if(destination % 8 == origin % 8){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case -7:
+                    if(destination % 8 == origin % 8 - 1){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case -1:
+                    if(destination % 8 == origin % 8 + 1){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case 1:
+                    if(destination % 8 == origin % 8 - 1){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case 7:
+                    if(destination % 8 == origin % 8 + 1){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case 8:
+                    if(destination % 8 == origin % 8){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case 9:
+                    if(destination % 8 == origin % 8 -1){
+                        if(kingCheck())
+                            validate = true;
+                    }
+                    break;
+                case 2:
+                    if(turn){
+                        if(kingWhite && leftWhiteRook){
+                            if(buttons[59].getTag().toString().equals("")
+                                    && buttons[57].getTag().toString().equals("")) {
+                                validate = true;
+                                castle = true;
+                            }
+                        }
+                        else
+                            validate = false;
+                    }
+                    else{
+                        if(kingBlack && leftBlackRook){
+                            if(buttons[3].getTag().toString().equals("")
+                                    && buttons[1].getTag().toString().equals("")) {
+                                validate = true;
+                                castle = true;
+                            }
+                        }
+                        else
+                            validate = false;
+                    }
+                    break;
+                case -2:
+                    if(turn){
+                        if(kingWhite && rightWhiteRook) {
+                            if(buttons[61].getTag().toString().equals("")) {
+                                validate = true;
+                                castle = true;
+                            }
+                        }
+                        else
+                            validate = false;
+                    }
+                    else{
+                        if(kingBlack && rightBlackRook) {
+                            if(buttons[5].getTag().toString().equals("")) {
+                                validate = true;
+                                castle = true;
+                            }
+                        }
+                        else
+                            validate = false;
+                    }
+                    break;
+                default:
+                    validate = false;
+            }
+            if(validate){
+                savedTag = buttons[destination].getTag().toString();
+                buttons[origin].setTag("");
+                if(turn) {
+                    buttons[destination].setTag("WK");
+                }
+                else{
+                    buttons[destination].setTag("BK");
+                }
+                if(castle) {
+                    if (destination == 2)
+                        handler.post(new Castle(3));
+                    else if (destination == 6)
+                        handler.post(new Castle(5));
+                    else if (destination == 58)
+                        handler.post(new Castle(59));
+                    else
+                        handler.post(new Castle(61));
+                }
+                else
+                    handler.post(new Check(destination));
+            }
+            else{
+                destination = -1;
+                origin = -1;
+                piece = "";
+                Toast.makeText(ChessActivity.this, "Invalid Move!", Toast.LENGTH_LONG).show();
+            }
+        }
+    };
 
     private Runnable queen = new Runnable() {
         @Override
@@ -2048,88 +2357,85 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
 
         public void run() {
             boolean check = false;
+            int j;
             if(turn){
-                if(true){
-                    int j = squareNum + 8;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        j += 8;
-                    }
-                    j = squareNum - 8;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        j -= 8;
-                    }
-                    j = squareNum + 1;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals("")){
-                            break;
-                        }
-                        if((j + 1) % 8 == 0)
-                            break;
-                        j += 1;
-                    }
-                    j = squareNum - 1;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if((j - 1) % 8 == 7)
-                            break;
-                        j -= 1;
-                    }
+                j = squareNum + 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j += 8;
                 }
-                if(!check){
-                    int j = squareNum + 9;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if(j  % 8 == 7)
-                            break;
-                        j += 9;
+                j = squareNum - 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j -= 8;
+                }
+                j = squareNum + 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
                     }
-                    j = squareNum + 7;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if(j  % 8 == 0)
-                            break;
-                        j += 7;
+                    if((j + 1) % 8 == 0)
+                        break;
+                    j += 1;
+                }
+                j = squareNum - 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if((j - 1) % 8 == 7)
+                        break;
+                    j -= 1;
+                }
+                j = squareNum + 9;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j += 9;
+                }
+                j = squareNum + 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 0)
+                        break;
+                    j += 7;
+                }
+                j = squareNum - 9;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
                     }
-                    j = squareNum - 9;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals("")){
-                            break;
-                        }
-                        if(j  % 8 == 0)
-                            break;
-                        j -= 9;
-                    }
-                    j = squareNum - 7;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if(j  % 8 == 7)
-                            break;
-                        j -= 7;
-                    }
+                    if(j  % 8 == 0)
+                        break;
+                    j -= 9;
+                }
+                j = squareNum - 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j -= 7;
                 }
                 if (!check){
                     if((squareNum + 6) < 64 && ((squareNum + 6) % 8 == (squareNum % 8 - 2))){
@@ -2173,88 +2479,83 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
             else{
-                if(!check){
-                    int j = squareNum + 8;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        j += 8;
-                    }
-                    j = squareNum - 8;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        j -= 8;
-                    }
-                    j = squareNum + 1;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals("")){
-                            break;
-                        }
-                        if((j + 1) % 8 == 0)
-                            break;
-                        j += 1;
-                    }
-                    j = squareNum - 1;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if((j - 1) % 8 == 7)
-                            break;
-                        j -= 1;
-                    }
+                j = squareNum + 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j += 8;
                 }
-                if(!check){
-                    int j = squareNum + 9;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if(j  % 8 == 7)
-                            break;
-                        j += 9;
+                j = squareNum - 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j -= 8;
+                }
+                j = squareNum + 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
                     }
-                    j = squareNum + 7;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if(j  % 8 == 0)
-                            break;
-                        j += 7;
+                    if((j + 1) % 8 == 0)
+                        break;
+                    j += 1;
+                }
+                j = squareNum - 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if((j - 1) % 8 == 7)
+                        break;
+                    j -= 1;
+                }
+                j = squareNum + 9;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j += 9;
+                }
+                j = squareNum + 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 0)
+                        break;
+                    j += 7;
+                }
+                j = squareNum - 9;
+                while(j >= 0 && j < 64 &&!check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
                     }
-                    j = squareNum - 9;
-                    while(j >= 0 && j < 64 &&!check){
-                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals("")){
-                            break;
-                        }
-                        if(j  % 8 == 0)
-                            break;
-                        j -= 9;
-                    }
-                    j = squareNum - 7;
-                    while(j >= 0 && j < 64 && !check){
-                        if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
-                            check = true;
-                        if(!buttons[j].getTag().toString().equals(""))
-                            break;
-                        if(j  % 8 == 7)
-                            break;
-                        j -= 7;
-                    }
-
+                    if(j  % 8 == 0)
+                        break;
+                    j -= 9;
+                }
+                j = squareNum - 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j -= 7;
                 }
                 if(!check){
                     if((squareNum + 6) < 64 && ((squareNum + 6) % 8 == (squareNum % 8 - 2))){
@@ -2298,6 +2599,11 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
             if(check){
+                if(castle) {
+                    castle = false;
+                    buttons[destination].setTag(savedTag);
+                    buttons[origin].setTag(piece);
+                }
                 if(enpasse){
                     enpasse = false;
                     buttons[enpasse_loc].setTag(savedTag);
@@ -2313,41 +2619,367 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 else
                     Toast.makeText(ChessActivity.this, "Black King is Under Check!", Toast.LENGTH_LONG).show();
             }
-            else{
-                if(enpasse){
+            else {
+                if (enpasse) {
                     enpasse = false;
                     buttons[destination].setImageResource(getImage());
                     buttons[origin].setImageResource(0);
                     buttons[enpasse_loc].setImageResource(0);
-
                 }
-                else{
+                else if(castle){
+                    castle = false;
+                    if(destination == 2){
+                        buttons[0].setTag("");
+                        buttons[0].setImageResource(0);
+                        buttons[2].setImageResource(getImage());
+                        buttons[3].setTag("BR");
+                        buttons[3].setImageResource(R.drawable.br);
+                        buttons[4].setImageResource(0);
+                    }
+                    else if(destination == 6){
+                        buttons[7].setTag("");
+                        buttons[7].setImageResource(0);
+                        buttons[6].setImageResource(getImage());
+                        buttons[5].setTag("BR");
+                        buttons[5].setImageResource(R.drawable.br);
+                        buttons[4].setImageResource(0);
+                    }
+                    else if(destination == 58){
+                        buttons[56].setTag("");
+                        buttons[56].setImageResource(0);
+                        buttons[58].setImageResource(getImage());
+                        buttons[59].setTag("WR");
+                        buttons[59].setImageResource(R.drawable.wr);
+                        buttons[60].setImageResource(0);
+                    }
+                    else{
+                        buttons[63].setTag("");
+                        buttons[63].setImageResource(0);
+                        buttons[62].setImageResource(getImage());
+                        buttons[61].setTag("WR");
+                        buttons[61].setImageResource(R.drawable.wr);
+                        buttons[60].setImageResource(0);
+                    }
+                }
+                else {
                     buttons[destination].setImageResource(getImage());
                     buttons[origin].setImageResource(0);
                 }
-                if(turn){
-                    for(int i = 0; i < 8; i++)
+                if (turn) {
+                    for (int i = 0; i < 8; i++)
                         blackPawns[i] = false;
-                    if(destination < 8 && buttons[destination].getTag().toString().charAt(1) == 'P'){
+                    if (piece.equals("WK"))
+                        whiteKing = destination;
+                    if (destination < 8 && buttons[destination].getTag().toString().charAt(1) == 'P') {
                         pawnPromotion = destination;
                         Intent WhitePawn = new Intent(ChessActivity.this, PawnDialog.class);
                         startActivityForResult(WhitePawn, white);
                     }
-                }
-                else{
-                    for(int i = 0; i < 8; i++)
+                    if (origin == 56)
+                        leftWhiteRook = false;
+                    else if (origin == 60)
+                        kingWhite = false;
+                    else if (origin == 63)
+                        rightWhiteRook = false;
+                    }
+                else {
+                    for (int i = 0; i < 8; i++)
                         whitePawns[i] = false;
-                    if(destination > 55 && buttons[destination].getTag().toString().charAt(1) == 'P'){
+                    if (piece.equals("BK"))
+                        blackKing = destination;
+                    if (destination > 55 && buttons[destination].getTag().toString().charAt(1) == 'P') {
                         pawnPromotion = destination;
                         Intent BlackPawn = new Intent(ChessActivity.this, BpawnDialog.class);
                         startActivityForResult(BlackPawn, black);
                     }
-                }
+                    if (origin == 0)
+                        leftBlackRook = false;
+                    else if (origin == 4)
+                        kingBlack = false;
+                    else if (origin == 7)
+                        rightBlackRook = false;
+                    }
                 turn = !turn;
             }
             destination = -1;
             origin = -1;
             piece = "";
+        }
+    }
+
+    private class Castle implements Runnable{
+
+        private int squareNum;
+
+        Castle(int squareNum){
+            this.squareNum = squareNum;
+        }
+
+        public void run() {
+            boolean check = false;
+            if(turn){
+                int j = squareNum + 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j += 8;
+                }
+                j = squareNum - 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j -= 8;
+                }
+                j = squareNum + 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
+                    }
+                    if((j + 1) % 8 == 0)
+                        break;
+                    j += 1;
+                }
+                j = squareNum - 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BR") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if((j - 1) % 8 == 7)
+                        break;
+                    j -= 1;
+                }
+                j = squareNum + 9;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j += 9;
+                }
+                j = squareNum + 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 0)
+                        break;
+                    j += 7;
+                }
+                j = squareNum - 9;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
+                    }
+                    if(j  % 8 == 0)
+                        break;
+                    j -= 9;
+                }
+                j = squareNum - 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j -= 7;
+                }
+                if (!check){
+                    if((squareNum + 6) < 64 && ((squareNum + 6) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum + 6].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 10) > 0 && ((squareNum - 10) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum - 10].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 17) > 0 && ((squareNum - 17) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum - 17].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum + 15) < 64 && ((squareNum + 15) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum + 15].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 15) > 0 && ((squareNum - 15) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum - 15].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum + 17) < 64 && ((squareNum + 17) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum + 17].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum - 6) > 0 && ((squareNum - 6) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum - 6].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                    if((squareNum + 10) < 64 && ((squareNum + 10) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum + 10].getTag().toString().equals("BN"))
+                            check = true;
+                    }
+                }
+                if(!check && squareNum > 15){
+                    if(squareNum % 8 == (squareNum - 7) % 8 - 1 && (buttons[squareNum - 7].getTag().toString().equals("BP")))
+                        check = true;
+                    else if(squareNum % 8 == (squareNum - 9) % 8 + 1 && (buttons[squareNum - 9].getTag().toString().equals("BP")))
+                        check = true;
+                }
+            }
+            else{
+                int j = squareNum + 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j += 8;
+                }
+                j = squareNum - 8;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    j -= 8;
+                }
+                j = squareNum + 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
+                    }
+                    if((j + 1) % 8 == 0)
+                        break;
+                    j += 1;
+                }
+                j = squareNum - 1;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WR") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if((j - 1) % 8 == 7)
+                        break;
+                    j -= 1;
+                }
+                j = squareNum + 9;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j += 9;
+                }
+                j = squareNum + 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 0)
+                        break;
+                    j += 7;
+                }
+                j = squareNum - 9;
+                while(j >= 0 && j < 64 &&!check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals("")){
+                        break;
+                    }
+                    if(j  % 8 == 0)
+                        break;
+                    j -= 9;
+                }
+                j = squareNum - 7;
+                while(j >= 0 && j < 64 && !check){
+                    if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
+                        check = true;
+                    if(!buttons[j].getTag().toString().equals(""))
+                        break;
+                    if(j  % 8 == 7)
+                        break;
+                    j -= 7;
+                }
+                if(!check){
+                    if((squareNum + 6) < 64 && ((squareNum + 6) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum + 6].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 10) > 0 && ((squareNum - 10) % 8 == (squareNum % 8 - 2))){
+                        if(buttons[squareNum - 10].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 17) > 0 && ((squareNum - 17) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum - 17].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum + 15) < 64 && ((squareNum + 15) % 8 == (squareNum % 8 - 1))){
+                        if(buttons[squareNum + 15].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 15) > 0 && ((squareNum - 15) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum - 15].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum + 17) < 64 && ((squareNum + 17) % 8 == (squareNum % 8 + 1))){
+                        if(buttons[squareNum + 17].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum - 6) > 0 && ((squareNum - 6) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum - 6].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                    if((squareNum + 10) < 64 && ((squareNum + 10) % 8 == (squareNum % 8 + 2))){
+                        if(buttons[squareNum + 10].getTag().toString().equals("WN"))
+                            check = true;
+                    }
+                }
+                if(!check && squareNum < 48){
+                    if(squareNum % 8 == (squareNum + 7) % 8 + 1 && (buttons[squareNum + 7].getTag().toString().equals("WP")))
+                        check = true;
+                    else if (squareNum % 8 == (squareNum + 9) % 8 - 1 && (buttons[squareNum + 9].getTag().toString().equals("WP")))
+                        check = true;
+                }
+            }
+            if(check){
+//                if(enpasse){
+//                    enpasse = false;
+//                    buttons[enpasse_loc].setTag(savedTag);
+//                    buttons[origin].setTag(piece);
+//                    buttons[destination].setTag("");
+//                }
+//                else {
+//                    buttons[destination].setTag(savedTag);
+//                    buttons[origin].setTag(piece);
+//                }
+                if(turn)
+                    Toast.makeText(ChessActivity.this, "White King is Under Check!", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(ChessActivity.this, "Black King is Under Check!", Toast.LENGTH_LONG).show();
+                castle = false;
+                destination = -1;
+                origin = -1;
+                piece = "";
+            }
+            else {
+                handler.post(new Check(destination));
+            }
         }
     }
 }

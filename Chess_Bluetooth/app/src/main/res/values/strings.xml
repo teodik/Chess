@@ -2,4 +2,6 @@
     <string name="app_name">Chess_Bluetooth</string>
     <string name="description">Chess Board Square</string>
     <string name="pawn">Pawn Promotion</string>
+    <string name="bluetooth">Bluetooth Mode</string>
+    <string name="local">Local Mode</string>
 </resources>

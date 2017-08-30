@@ -6,6 +6,8 @@
     android:rowCount="2"
     android:layout_height="match_parent">
 
+    <!--Teodik Meserkhani August 2017-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
