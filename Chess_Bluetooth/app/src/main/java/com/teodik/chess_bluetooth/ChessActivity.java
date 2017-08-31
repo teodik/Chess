@@ -2679,7 +2679,7 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                         kingWhite = false;
                     else if (origin == 63)
                         rightWhiteRook = false;
-                    }
+                }
                 else {
                     for (int i = 0; i < 8; i++)
                         whitePawns[i] = false;
@@ -2696,7 +2696,7 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                         kingBlack = false;
                     else if (origin == 7)
                         rightBlackRook = false;
-                    }
+                }
                 turn = !turn;
             }
             destination = -1;
@@ -2961,6 +2961,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 else
                     Toast.makeText(ChessActivity.this, "Black King is/would be Under Check!", Toast.LENGTH_LONG).show();
                 castle = false;
+                buttons[destination].setTag(savedTag);
+                buttons[origin].setTag(piece);
                 destination = -1;
                 origin = -1;
                 piece = "";
