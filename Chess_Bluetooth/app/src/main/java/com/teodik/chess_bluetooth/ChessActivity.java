@@ -2118,6 +2118,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             }
             j = origin + 7;
             while(j >= 0 && j < 64){
+                if(origin % 8 == 0)
+                    break;
                 if(j == destination){
                     savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
@@ -2147,6 +2149,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             }
             j = origin - 7;
             while(j >= 0 && j < 64){
+                if(origin % 8 == 7)
+                    break;
                 if(j == destination){
                     savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
