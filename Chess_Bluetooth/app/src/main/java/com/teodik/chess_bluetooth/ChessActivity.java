@@ -2112,6 +2112,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             validate = false;
             int j = origin + 9;
             while(j >= 0 && j < 64){
+                if(origin % 8 == 7)
+                    break;
                 if(j == destination){
                     savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
@@ -2142,6 +2144,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
             }
             j = origin - 9;
             while(j >= 0 && j < 64){
+                if(origin % 8 == 0)
+                    break;
                 if(j == destination){
                     savedTag = buttons[destination].getTag().toString();
                     buttons[destination].setTag(piece);
@@ -2412,6 +2416,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum + 9;
                 while(j >= 0 && j < 64 && !check){
+                    if(squareNum % 8 == 7)
+                        break;
                     if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals(""))
@@ -2434,6 +2440,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum - 9;
                 while(j >= 0 && j < 64 && !check){
+                    if(squareNum % 8 == 0)
+                        break;
                     if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals("")){
@@ -2540,6 +2548,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum + 9;
                 while(j >= 0 && j < 64 && !check){
+                    if(squareNum % 8 == 7)
+                        break;
                     if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals(""))
@@ -2562,6 +2572,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum - 9;
                 while(j >= 0 && j < 64 &&!check){
+                    if(squareNum % 8 == 0)
+                        break;
                     if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals("")){
@@ -2787,6 +2799,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum + 9;
                 while(j >= 0 && j < 64 && !check){
+                    if(squareNum % 8 == 7)
+                        break;
                     if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals(""))
@@ -2809,6 +2823,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum - 9;
                 while(j >= 0 && j < 64 && !check){
+                    if(squareNum % 8 == 0)
+                        break;
                     if(buttons[j].getTag().toString().equals("BB") || buttons[j].getTag().toString().equals("BQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals("")){
@@ -2915,6 +2931,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum + 9;
                 while(j >= 0 && j < 64 && !check){
+                    if(squareNum % 8 == 7)
+                        break;
                     if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals(""))
@@ -2937,6 +2955,8 @@ public class ChessActivity extends AppCompatActivity implements View.OnClickList
                 }
                 j = squareNum - 9;
                 while(j >= 0 && j < 64 &&!check){
+                    if(squareNum % 8 == 0)
+                        break;
                     if(buttons[j].getTag().toString().equals("WB") || buttons[j].getTag().toString().equals("WQ"))
                         check = true;
                     if(!buttons[j].getTag().toString().equals("")){
